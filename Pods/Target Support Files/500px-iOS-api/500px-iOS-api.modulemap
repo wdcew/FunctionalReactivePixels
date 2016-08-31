@@ -1,0 +1,6 @@
+framework module _500px_iOS_api {
+  umbrella header "500px-iOS-api-umbrella.h"
+
+  export *
+  module * { export * }
+}
