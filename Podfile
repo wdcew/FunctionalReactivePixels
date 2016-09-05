@@ -6,6 +6,8 @@ target 'FPR1' do
   use_frameworks!
 
   # Pods for FPR1
+  pod 'SwiftyBeaver'
+  pod 'Rex', '~> 0.11.0'
   pod 'ReactiveCocoa'
   pod '500px-iOS-api'
   pod 'SVProgressHUD', '1.0'

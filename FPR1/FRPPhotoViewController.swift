@@ -9,7 +9,6 @@
 import UIKit
 import SVProgressHUD
 import ReactiveCocoa
-
 class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
     //MARK: store property
     var index: Int?
@@ -63,17 +62,21 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
                 return nil
         }
         scrollView.addSubview(imageView)
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         SVProgressHUD.show()
+        
         FRPPhotoImporter.fetchDetailPhoto(model: photoModel!)
-            .deliverOn(RACScheduler.mainThreadScheduler())
-            .subscribeError({print($0)}) {
+            .on(failed:{ error in
+                log.warning(error)
+            })
+            .observeOn(UIScheduler())
+            .startWithNext({ _ in
                 SVProgressHUD.dismiss()
-        }
+            })
+        
     }
 }
 

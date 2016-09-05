@@ -12,8 +12,6 @@ import SVProgressHUD
 
 class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     //MARK: Store Property
-    let subject: RACSubject = RACSubject()
-    
     var photoModels: [FRPPhotoModel]?  = nil
     
     lazy var pageViewController: UIPageViewController = {
@@ -62,7 +60,6 @@ typealias PageViewControllerDataSource = FRPFullSizePhotoViewController
 extension PageViewControllerDataSource {
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        
         return self.photoViewController(forIndex: (viewController as! FRPPhotoViewController).index! + 1)
     }
     

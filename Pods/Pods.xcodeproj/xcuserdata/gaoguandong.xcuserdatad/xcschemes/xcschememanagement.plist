@@ -34,12 +34,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Rex.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyBeaver.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,17 +72,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7308633F5BF2EB1D6013B4B7649EC097</key>
+		<key>1795FD13AC064F9A10E74F5FE2424BB9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>662115329755600633EA955B35B822C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>748E6B068644F662332851D0C014126F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>7CDFDA8567A5A04D97355AA0E8D1E841</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7DFD7C201EF94F4A33501B1F9C078E43</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,22 +102,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8BA0CC21DD4EF946EF2DC12A7D67BD15</key>
+		<key>B251CBE52E44FF0D4229130C52D93608</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8BD5A74C937F9FC26AEC1011DCAE5A4B</key>
+		<key>BCBD76733326CEC5E6653A8303F246E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB6E633F7A1127A383623EA817C4BB8F</key>
+		<key>C1C9D6EDD158E80DA02C78F3E1FC43A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FB36A32ECE8B0C21B10E2A85D4169D86</key>
+		<key>E1E6A5066E2876F83985C00E6CD0347E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEF8BFB10A59F5A24EC62F9BEA52DC42</key>
 		<dict>
 			<key>primary</key>
 			<true/>

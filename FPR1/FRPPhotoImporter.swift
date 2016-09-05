@@ -1,4 +1,3 @@
-//
 //  FRPPhotoImporter.swift
 //  FPR
 //
@@ -22,29 +21,27 @@ class FRPPhotoImporter: NSObject {
         return PXRequest.apiHelper().urlRequestForPhotoID(model.identifier!.integerValue, photoSizes: PXPhotoModelSize.Large , commentsPage: -1)
     }
     
-    class func fetchDetailPhoto(model model: FRPPhotoModel) -> RACSignal {
-        let subject = RACReplaySubject()
-        let request = self.self.detailPhotoURLRequest(model)
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue()) { (response, data, error) in
-            if let data = data {
+    class func fetchDetailPhoto(model model: FRPPhotoModel) -> SignalProducer<NSData, NoError> {
+        let request = FRPPhotoImporter.detailPhotoURLRequest(model)
+        return NSURLSession.sharedSession().rac_dataWithRequest(request)
+            .replayLazily(1)
+            .map({ (data, response) in
                 let result = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! DictType
-                
                 let photoinfo = result!["photo"] as! DictType
                 self.configureModel(model, witDictionary: photoinfo)
                 self.downloadFullimage(withModel: model)
                 
-                subject.sendNext(model)
-                subject.sendCompleted()
-            } else {
-                //发生错误
-                subject.sendError(error)
-            }
-        }
-        return subject
+                return data
+            })
+            .flatMapError({ (error) in
+                log.warning(error)
+                return SignalProducer.empty
+            })
     }
     
-    class func inportPhotos () -> RACSignal {
-        let subject = RACReplaySubject.init()
+    class func inportPhotos () -> SignalProducer<[FRPPhotoModel],NSError> {
+        let (singal, observer) = Signal<[FRPPhotoModel], NSError>.pipe()
+        let producer = SignalProducer.init(signal: singal).replayLazily(1)
         let request = self.popualUrlRequest()
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) in
             if let vaildData = data {
@@ -61,14 +58,15 @@ class FRPPhotoImporter: NSObject {
                         return model
                     })
                 //订阅者发送数据
-                subject .sendNext(models)
-                subject.sendCompleted()
+                observer.sendNext(models)
+                observer.sendCompleted()
             } else {
                 //数据错误
-                subject .sendError(error)
+                observer.sendFailed(error!)
+                
             }
         }
-        return subject
+        return producer
     }
     
     class func configureModel(model: FRPPhotoModel, witDictionary dict: DictType) {
@@ -95,26 +93,31 @@ class FRPPhotoImporter: NSObject {
     }
     
     class func downloadFullimage(withModel model: FRPPhotoModel) {
-        let url = NSURL(string: model.fullsizedURL!)
-        let request = NSURLRequest(URL: url!)
-        NSURLConnection.sendAsynchronousRequest(request, queue:NSOperationQueue()) { (response, data, error) in
-            if error != nil {
-                print(error)
-            }
-            model.fullsizedData = data;
+        download(URL: model.fullsizedURL!)
+            .startWithNext { (data) in
+                model.fullsizedData = data
         }
     }
     
     class func downloadThumbnail(withModel model: FRPPhotoModel) {
-        let url = NSURL(string: model.thumbnailURL!)
-        let request = NSURLRequest(URL: url!)
-        NSURLConnection.sendAsynchronousRequest(request, queue:NSOperationQueue()) { (response, data, error) in
-            if error != nil {
-                print(error)
-            }
-            model.thumbnailData = data;
-            
+        download(URL: model.thumbnailURL)
+            .startWithNext { (data) in
+                model.thumbnailData = data
         }
     }
     
+    class func download(URL str: String?) -> SignalProducer<NSData,NoError> {
+        guard let url = str else {return SignalProducer.empty}
+        let request = NSURLRequest(URL: NSURL.init(string: url)!)
+        return NSURLSession.sharedSession().rac_dataWithRequest(request)
+            .map({ (data, response) in
+                return data
+            })
+            .flatMapError() {
+                //下载数据错误返回空的Singal
+                log.warning($0)
+                return SignalProducer.empty
+            }
+            .observeOn(UIScheduler())
+    }
 }

@@ -8,6 +8,9 @@
 
 import UIKit
 
+import SwiftyBeaver
+let log = SwiftyBeaver.self
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -24,7 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let collectionCtrl = FRPGallerCollectionViewController.init(collectionViewLayout: FRPGalleryFlowLayout())
         self.window?.rootViewController = UINavigationController(rootViewController: collectionCtrl)
         self.window?.makeKeyAndVisible()
+        
+        /** 配置SwiftyBeaver **/
+        let console = ConsoleDestination()
+        console.colored = false
+        log.addDestination(console)
+        
         return true
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -13,7 +13,7 @@
 		9007EB6D1D740E090046403A /* FRPCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9007EB6C1D740E090046403A /* FRPCell.swift */; };
 		9007EB6F1D7425F70046403A /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9007EB6E1D7425F70046403A /* ReactiveCocoaBindings.swift */; };
 		90591B0F1D756D6B004B8C08 /* FRPPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90591B0E1D756D6B004B8C08 /* FRPPhotoViewController.swift */; };
-		906541BE1D714F8000C6497A /* FRPGallerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906541B91D714F8000C6497A /* FRPGallerCollectionViewController.swift */; };
+		906541BE1D714F8000C6497A /* FRPGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906541B91D714F8000C6497A /* FRPGalleryViewController.swift */; };
 		906541BF1D714F8000C6497A /* FRPGalleryFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906541BA1D714F8000C6497A /* FRPGalleryFlowLayout.swift */; };
 		906541C01D714F8000C6497A /* FRPPhotoImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906541BB1D714F8000C6497A /* FRPPhotoImporter.swift */; };
 		906541C11D714F8000C6497A /* FRPPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 906541BD1D714F8000C6497A /* FRPPhotoModel.m */; };
@@ -63,9 +63,15 @@
 		5ECB96C7E59B98720F268955 /* Pods-FPR1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FPR1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FPR1/Pods-FPR1.debug.xcconfig"; sourceTree = "<group>"; };
 		9007EB6C1D740E090046403A /* FRPCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPCell.swift; sourceTree = "<group>"; };
 		9007EB6E1D7425F70046403A /* ReactiveCocoaBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactiveCocoaBindings.swift; path = "../../../Swift-RAC-Macros/ReactiveCocoaBindings.swift"; sourceTree = "<group>"; };
+		9038BBA01D7737200072A423 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/ReactiveCocoa/ReactiveCocoa.framework"; sourceTree = "<group>"; };
+		9038BBA11D7737200072A423 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/Result/Result.framework"; sourceTree = "<group>"; };
+		9038BBA21D7737200072A423 /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rex.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/Rex/Rex.framework"; sourceTree = "<group>"; };
+		9038BBA31D7737200072A423 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/SDWebImage/SDWebImage.framework"; sourceTree = "<group>"; };
+		9038BBA41D7737200072A423 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/SVProgressHUD/SVProgressHUD.framework"; sourceTree = "<group>"; };
+		9038BBA51D7737200072A423 /* YYModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YYModel.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/YYModel/YYModel.framework"; sourceTree = "<group>"; };
 		90591B0E1D756D6B004B8C08 /* FRPPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPPhotoViewController.swift; sourceTree = "<group>"; };
 		906541B81D714F8000C6497A /* FPR1-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FPR1-Bridging-Header.h"; sourceTree = "<group>"; };
-		906541B91D714F8000C6497A /* FRPGallerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPGallerCollectionViewController.swift; sourceTree = "<group>"; };
+		906541B91D714F8000C6497A /* FRPGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPGalleryViewController.swift; sourceTree = "<group>"; };
 		906541BA1D714F8000C6497A /* FRPGalleryFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPGalleryFlowLayout.swift; sourceTree = "<group>"; };
 		906541BB1D714F8000C6497A /* FRPPhotoImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPPhotoImporter.swift; sourceTree = "<group>"; };
 		906541BC1D714F8000C6497A /* FRPPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRPPhotoModel.h; sourceTree = "<group>"; };
@@ -176,7 +182,7 @@
 		9093C59A1D752AF900A07B72 /* Galler */ = {
 			isa = PBXGroup;
 			children = (
-				906541B91D714F8000C6497A /* FRPGallerCollectionViewController.swift */,
+				906541B91D714F8000C6497A /* FRPGalleryViewController.swift */,
 			);
 			name = Galler;
 			sourceTree = "<group>";
@@ -272,6 +278,12 @@
 		92D80CEA6FDD2C9453823D19 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9038BBA01D7737200072A423 /* ReactiveCocoa.framework */,
+				9038BBA11D7737200072A423 /* Result.framework */,
+				9038BBA21D7737200072A423 /* Rex.framework */,
+				9038BBA31D7737200072A423 /* SDWebImage.framework */,
+				9038BBA41D7737200072A423 /* SVProgressHUD.framework */,
+				9038BBA51D7737200072A423 /* YYModel.framework */,
 				2CDEB8D5344641A72DE9B34B /* Pods_FPR1.framework */,
 				20E05DF809BB48BAE9950AF4 /* Pods_FPR1Tests.framework */,
 				9940C04588A315F8E54720D5 /* Pods_FPR1UITests.framework */,
@@ -564,7 +576,7 @@
 				909773411D714A39007C85B1 /* ViewController.swift in Sources */,
 				906541C11D714F8000C6497A /* FRPPhotoModel.m in Sources */,
 				906541DE1D7151C500C6497A /* README.markdown in Sources */,
-				906541BE1D714F8000C6497A /* FRPGallerCollectionViewController.swift in Sources */,
+				906541BE1D714F8000C6497A /* FRPGalleryViewController.swift in Sources */,
 				906541DB1D7151C500C6497A /* PXAPIHelper.m in Sources */,
 				906541D71D7151C500C6497A /* NSData+Base64.m in Sources */,
 				906541C01D714F8000C6497A /* FRPPhotoImporter.swift in Sources */,

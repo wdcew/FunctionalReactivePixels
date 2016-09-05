@@ -1,0 +1,6 @@
+framework module Rex {
+  umbrella header "Rex-umbrella.h"
+
+  export *
+  module * { export * }
+}
