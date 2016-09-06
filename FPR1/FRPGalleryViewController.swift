@@ -2,8 +2,8 @@
 //  FRPGallerCollectionViewController.swift
 //  FPR
 //
-//  Created by 高冠东 on 8/26/16.
-//  Copyright © 2016 高冠东. All rights reserved.
+//  Created by wdcew on 5/26/16.
+//  Copyright © 2016 wdcew. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ private let reuseIdentifier = "Cell"
 
 class FRPGallerCollectionViewController: UICollectionViewController {
     //MARK: - Store Property
-     let photoArray = MutableProperty([FRPPhotoModel]())
+    let viewModel = FRPGalleryViewModel()
     
     //MARK: - lifeCycle
     override init(collectionViewLayout layout: UICollectionViewLayout) {
@@ -41,31 +41,23 @@ class FRPGallerCollectionViewController: UICollectionViewController {
     func bindToProperty () {
         /** binde photoArray，一旦其值发送变化，立即更新 **/
         weak var weakSelf = self
-        photoArray.producer.startWithNext { (arrays) in
+        viewModel.photoArray.producer.startWithNext { (arrays) in
             let strongSelf = weakSelf
             strongSelf?.collectionView?.reloadData()
         }
-        log.warning("")
         
-        /** 获取 photosModel **/
-        photoArray <~ FRPPhotoImporter.inportPhotos()
-            .flatMapError({ (error) in
-                print("could't obtan Photos JSON Data,Error: \(error)")
-                return SignalProducer<[FRPPhotoModel], NoError>.empty
-            })
     }
     
     func RACDelegate () {
         /** collectionDelegate **/
-        weak var weakSelf = self
         self.rac_signalForSelector(#selector(UICollectionViewDelegate.collectionView(_:didSelectItemAtIndexPath:)),
                                    fromProtocol: UICollectionViewDelegate.self)
-            .subscribeNext { (tuple) in
+            .subscribeNext {[weak self] (tuple) in
                 let tuple = tuple as! RACTuple
-                let strongSelf = weakSelf
+                let strongSelf = self
                 let indexPath = tuple.second
                 
-                let vc = FRPFullSizePhotoViewController.init(modelArray: strongSelf!.photoArray.value, PhotoIndex: indexPath.row)
+                let vc = FRPFullSizePhotoViewController.init(modelArray: strongSelf!.viewModel.photoArray.value, PhotoIndex: indexPath.row)
                 strongSelf!.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -77,7 +69,6 @@ class FRPGallerCollectionViewController: UICollectionViewController {
 
 //     MARK: - UICollectionViewDataSource
 typealias UIcollectionViewDataSource = FRPGallerCollectionViewController
-
 extension UIcollectionViewDataSource {
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -85,15 +76,14 @@ extension UIcollectionViewDataSource {
         return 1
     }
 
-
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return photoArray.value.count
+        return viewModel.photoArray.value.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! FRPCell
-        cell.photoModel = photoArray.value[indexPath.row]
+        cell.photoModel = viewModel.photoArray.value[indexPath.row]
         return cell
         
     }

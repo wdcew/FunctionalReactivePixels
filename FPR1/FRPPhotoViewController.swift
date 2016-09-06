@@ -2,17 +2,18 @@
 //  FRPPhotoViewController.swift
 //  FPR1
 //
-//  Created by 高冠东 on 8/30/16.
-//  Copyright © 2016 高冠东. All rights reserved.
+//  Created by wdcew on 5/30/16.
+//  Copyright © 2016 wdcew. All rights reserved.
 //
 
 import UIKit
 import SVProgressHUD
 import ReactiveCocoa
+import Rex
 class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
     //MARK: store property
     var index: Int?
-    private var photoModel: FRPPhotoModel?
+    private var ViewModel: FRPPhotoViewModel
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView.init(frame: self.view.bounds)
@@ -38,7 +39,8 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
     //MARK: - lifecycle method
     init(withModel model: FRPPhotoModel, index: Int?) {
         self.index = index
-        self.photoModel = model
+        self.ViewModel = FRPPhotoViewModel(model: model)
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,35 +50,25 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.show()
         
         /* set scrollView */
         scrollView.contentSize = view.bounds.size
         view.addSubview(scrollView)
         
-        /* set imageview */
-        RAC(imageView, "image") <~ RACObserve(photoModel!, "fullsizedData")
-            .map(){value in
-                if let value = value {
-                    return UIImage.init(data: value as! NSData)
-                }
-                return nil
-        }
         scrollView.addSubview(imageView)
+        /* View Bind */
+        imageView.rex_image <~ ViewModel.fullImage.producer
+        
+        ViewModel.loading.producer
+            .observeOn(UIScheduler())
+            .startWithNext({_ in
+                SVProgressHUD.dismiss()
+            })
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        SVProgressHUD.show()
-        
-        FRPPhotoImporter.fetchDetailPhoto(model: photoModel!)
-            .on(failed:{ error in
-                log.warning(error)
-            })
-            .observeOn(UIScheduler())
-            .startWithNext({ _ in
-                SVProgressHUD.dismiss()
-            })
-        
     }
 }
 

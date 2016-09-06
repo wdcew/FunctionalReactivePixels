@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoImporter.swift"
-            timestampString = "494750222.125668"
+            timestampString = "494775306.589983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "inportPhotos()"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "importPhotos()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoImporter.swift"
-            timestampString = "494750222.125668"
+            timestampString = "494775306.589983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "configureModel(_:witDictionary:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoImporter.swift"
-            timestampString = "494750222.125668"
+            timestampString = "494775306.589983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "inportPhotos()"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "importPhotos()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoImporter.swift"
-            timestampString = "494750222.125668"
+            timestampString = "494775306.589983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "configureModel(_:witDictionary:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -155,28 +155,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FPR1/FRPPhotoViewController.swift"
-            timestampString = "494308488.516323"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "init(withModel:index:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoImporter.swift"
-            timestampString = "494750222.125668"
+            timestampString = "494775306.589983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "urlForImageSize(_:inDictionary:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -188,11 +172,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPFullSizePhotoViewController.swift"
-            timestampString = "494309255.582575"
+            timestampString = "494775054.957965"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -395,11 +379,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoImporter.swift"
-            timestampString = "494750222.125668"
+            timestampString = "494775306.589983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "downloadFullimage(withModel:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -459,12 +443,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoImporter.swift"
-            timestampString = "494750222.125668"
+            timestampString = "494775306.589983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "inportPhotos()"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "importPhotos()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -539,11 +523,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoImporter.swift"
-            timestampString = "494751280.457672"
+            timestampString = "494775306.589983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "fetchDetailPhoto(model:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -555,11 +539,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoViewController.swift"
-            timestampString = "494751371.622375"
+            timestampString = "494831870.687552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -571,12 +555,92 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FPR1/FRPPhotoViewController.swift"
-            timestampString = "494751372.996696"
+            timestampString = "494829268.898719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "init(withModel:index:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FPR1/FRPPhotoViewController.swift"
+            timestampString = "494861421.844391"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FPR1/FRPPhotoViewController.swift"
+            timestampString = "494861421.844391"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FPR1.FRPPhotoViewController.viewDidLoad () -&gt; ()"
+                  moduleName = "FPR1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaoguandong/Documents/RAC/FPR1/FPR1/FRPPhotoViewController.swift"
+                  timestampString = "494831977.754951"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "1498">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FPR1.FRPPhotoViewController.(viewDidLoad () -&gt; ()).(closure #1)"
+                  moduleName = "FPR1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gaoguandong/Documents/RAC/FPR1/FPR1/FRPPhotoViewController.swift"
+                  timestampString = "494831977.755296"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "69">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FPR1/FRPPhotoViewModel.swift"
+            timestampString = "494861414.685451"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "init(model:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

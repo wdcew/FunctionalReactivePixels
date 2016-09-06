@@ -2,8 +2,8 @@
 //  FRPFullSizePhotoViewController.swift
 //  FPR1
 //
-//  Created by 高冠东 on 8/30/16.
-//  Copyright © 2016 高冠东. All rights reserved.
+//  Created by wdcew on 5/30/16.
+//  Copyright © 2016 wdcew. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ import SVProgressHUD
 
 class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     //MARK: Store Property
-    var photoModels: [FRPPhotoModel]?  = nil
+    var viewModel: FRPFullSizePhotoViewModel
     
     lazy var pageViewController: UIPageViewController = {
         let vc = UIPageViewController.init(transitionStyle:.Scroll, navigationOrientation: .Horizontal,
@@ -24,13 +24,9 @@ class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDele
     
     //MARK: - liferCycle method
     init(modelArray models: [FRPPhotoModel], PhotoIndex index: Int) {
-        photoModels = models
+        self.viewModel = FRPFullSizePhotoViewModel.init(models: models, atIndex: index)
         super.init(nibName: nil, bundle: nil)
         title = models[index].photoName
-        
-        self.addChildViewController(pageViewController)
-        self.pageViewController.setViewControllers([photoViewController(forIndex: index)!],
-                                                   direction: UIPageViewControllerNavigationDirection.Forward, animated: true) {$0}
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,39 +38,39 @@ class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDele
         
         view.backgroundColor = UIColor.darkGrayColor()
         
+        self.addChildViewController(pageViewController)
+        pageViewController.setViewControllers([photoViewController(forIndex: viewModel.initIndex)!],
+                                                   direction: UIPageViewControllerNavigationDirection.Forward, animated: true) {$0}
         pageViewController.view.frame = view.bounds
         view.addSubview(pageViewController.view)
         
     }
+    
     //MARK: custom method
     func photoViewController(forIndex index: Int) -> FRPPhotoViewController? {
-        if index >= 0 && index <= photoModels!.count - 1  {
-            return FRPPhotoViewController.init(withModel: photoModels![index], index: index)
-        }
-        return nil
+        return FRPPhotoViewController.init(withModel: viewModel.photoModels[index], index: index)
     }
     
 }
-    //MARK: - UIPageViewControllerDelegate
+   //MARK: - UIPageViewControllerDataSource
 typealias PageViewControllerDataSource = FRPFullSizePhotoViewController
 extension PageViewControllerDataSource {
-    
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        return self.photoViewController(forIndex: (viewController as! FRPPhotoViewController).index! + 1)
+        return self.photoViewController(forIndex: viewModel.initIndex + 1)
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        return self.photoViewController(forIndex: (viewController as! FRPPhotoViewController).index! - 1)
+        return self.photoViewController(forIndex: viewModel.initIndex - 1)
     }
     
 }
 
+    //MARK: - UIPageViewControllerDelegate
 typealias PageViewControllerDelegate = FRPFullSizePhotoViewController
 extension PageViewControllerDelegate {
     
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        print(pageViewController.gestureRecognizers)
-//        pageViewController.viewControllers?.first?.title = pageViewController.viewControllers?.first as! 
+//        pageViewController.viewControllers?.first?.title = pageViewController.viewControllers?.first as!
     }
 }

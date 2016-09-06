@@ -1,8 +1,8 @@
 //  FRPPhotoImporter.swift
 //  FPR
 //
-//  Created by 高冠东 on 8/26/16.
-//  Copyright © 2016 高冠东. All rights reserved.
+//  Created by wdcew on 5/26/16.
+//  Copyright © 2016 wdcew. All rights reserved.
 //
 
 import UIKit
@@ -13,18 +13,17 @@ import YYModel
 class FRPPhotoImporter: NSObject {
  typealias DictType = Dictionary<String, AnyObject>
     
-    static func popualUrlRequest () -> NSURLRequest {
+    private static func popualUrlRequest () -> NSURLRequest {
         return PXRequest.apiHelper().urlRequestForPhotoFeature(PXAPIHelperPhotoFeature.Popular, resultsPerPage: 100, page: 0, photoSizes: PXPhotoModelSize.Thumbnail, sortOrder: PXAPIHelperSortOrder.Rating, except: PXPhotoModelCategory.PXPhotoModelCategoryNude)
     }
     
-    class func detailPhotoURLRequest(model: FRPPhotoModel) -> NSURLRequest {
+    private static func detailPhotoURLRequest(model: FRPPhotoModel) -> NSURLRequest {
         return PXRequest.apiHelper().urlRequestForPhotoID(model.identifier!.integerValue, photoSizes: PXPhotoModelSize.Large , commentsPage: -1)
     }
     
-    class func fetchDetailPhoto(model model: FRPPhotoModel) -> SignalProducer<NSData, NoError> {
+    static func fetchDetailPhoto(model model: FRPPhotoModel) -> SignalProducer<NSData, NoError> {
         let request = FRPPhotoImporter.detailPhotoURLRequest(model)
         return NSURLSession.sharedSession().rac_dataWithRequest(request)
-            .replayLazily(1)
             .map({ (data, response) in
                 let result = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! DictType
                 let photoinfo = result!["photo"] as! DictType
@@ -39,7 +38,7 @@ class FRPPhotoImporter: NSObject {
             })
     }
     
-    class func inportPhotos () -> SignalProducer<[FRPPhotoModel],NSError> {
+    static func importPhotos() -> SignalProducer<[FRPPhotoModel],NSError> {
         let (singal, observer) = Signal<[FRPPhotoModel], NSError>.pipe()
         let producer = SignalProducer.init(signal: singal).replayLazily(1)
         let request = self.popualUrlRequest()
@@ -69,7 +68,7 @@ class FRPPhotoImporter: NSObject {
         return producer
     }
     
-    class func configureModel(model: FRPPhotoModel, witDictionary dict: DictType) {
+    static func configureModel(model: FRPPhotoModel, witDictionary dict: DictType) {
         model.photoName = dict["name"] as? String
         model.identifier = dict["id"] as? NSNumber
         let user = dict["user"] as! NSDictionary
@@ -85,28 +84,28 @@ class FRPPhotoImporter: NSObject {
         }
     }
     
-    class func urlForImageSize(imageSize: Int, inDictionary imags: Array<DictType>) -> String {
+    static func urlForImageSize(imageSize: Int, inDictionary imags: Array<DictType>) -> String {
         let image = imags
             .filter {($0["size"] as! Int) <= imageSize}
             .map {$0["url"]}.first
         return image as! String
     }
     
-    class func downloadFullimage(withModel model: FRPPhotoModel) {
+    static func downloadFullimage(withModel model: FRPPhotoModel) {
         download(URL: model.fullsizedURL!)
             .startWithNext { (data) in
                 model.fullsizedData = data
         }
     }
     
-    class func downloadThumbnail(withModel model: FRPPhotoModel) {
+    static func downloadThumbnail(withModel model: FRPPhotoModel) {
         download(URL: model.thumbnailURL)
             .startWithNext { (data) in
                 model.thumbnailData = data
         }
     }
     
-    class func download(URL str: String?) -> SignalProducer<NSData,NoError> {
+    private class func download(URL str: String?) -> SignalProducer<NSData,NoError> {
         guard let url = str else {return SignalProducer.empty}
         let request = NSURLRequest(URL: NSURL.init(string: url)!)
         return NSURLSession.sharedSession().rac_dataWithRequest(request)

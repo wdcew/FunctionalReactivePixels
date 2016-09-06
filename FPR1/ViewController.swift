@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  FPR1
 //
-//  Created by 高冠东 on 8/27/16.
-//  Copyright © 2016 高冠东. All rights reserved.
+//  Created by wdcew on 5/27/16.
+//  Copyright © 2016 wdcew. All rights reserved.
 //
 
 import UIKit
