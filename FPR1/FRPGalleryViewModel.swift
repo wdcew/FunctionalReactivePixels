@@ -7,24 +7,25 @@
 //
 
 import UIKit
-import Result
-import ReactiveCocoa
-import Rex
+//import Result
+//import ReactiveCocoa
+//import Rex
+import RxSwift
+import RxCocoa
 
 class FRPGalleryViewModel: NSObject {
-    let photoArray: MutableProperty<[FRPPhotoModel]>
+    let photoArray: Variable<[FRPPhotoModel]>
     
     override init() {
-        photoArray = MutableProperty([FRPPhotoModel]())
+        photoArray = Variable.init([FRPPhotoModel]())
         super.init()
-        photoArray <~ downloadPhtosModel().producer
+        downloadPhtosModel()
     }
     /** 获取 photos model **/
-    func downloadPhtosModel() -> SignalProducer<[FRPPhotoModel],NoError> {
-        return FRPPhotoImporter.importPhotos()
-            .flatMapError({ (error) in
-                log.warning("could't obtan Photos JSON Data,Error: \(error)")
-                return SignalProducer<[FRPPhotoModel], NoError>.empty
-            })
+    func downloadPhtosModel() {
+        FRPPhotoImporter.importPhotos()
+            .bindTo(photoArray)
+        
+        
     }
 }

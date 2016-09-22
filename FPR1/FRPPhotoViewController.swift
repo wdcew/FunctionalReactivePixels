@@ -8,8 +8,8 @@
 
 import UIKit
 import SVProgressHUD
-import ReactiveCocoa
-import Rex
+import RxSwift
+import RxCocoa
 class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
     //MARK: store property
     var index: Int?
@@ -22,8 +22,8 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
         view.bounces = false
         view.showsHorizontalScrollIndicator = false
         view.showsVerticalScrollIndicator = false
-        
         view.delegate = self
+        
         view.backgroundColor = UIColor.blackColor()
         return view
     }()
@@ -37,7 +37,7 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
     }()
     
     //MARK: - lifecycle method
-    init(withModel model: FRPPhotoModel, index: Int?) {
+    init?(withModel model: FRPPhotoModel, index: Int?) {
         self.index = index
         self.ViewModel = FRPPhotoViewModel(model: model)
         
@@ -50,21 +50,27 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SVProgressHUD.show()
         
         /* set scrollView */
         scrollView.contentSize = view.bounds.size
         view.addSubview(scrollView)
         
         scrollView.addSubview(imageView)
-        /* View Bind */
-        imageView.rex_image <~ ViewModel.fullImage.producer
         
-        ViewModel.loading.producer
-            .observeOn(UIScheduler())
-            .startWithNext({_ in
-                SVProgressHUD.dismiss()
-            })
+        /* View Bind */
+        ViewModel.fullImage.asObservable()
+            .observeOn(MainScheduler.instance)
+            .bindTo(imageView.rx_image)
+        
+        ViewModel.loading
+            .observeOn(MainScheduler.instance)
+            .subscribeNext{ (bool) in
+                if bool {
+                    SVProgressHUD.show()
+                } else {
+                    SVProgressHUD.dismiss()
+                }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -76,6 +82,7 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
 typealias ScrollViewDelegate = FRPPhotoViewController
 extension ScrollViewDelegate {
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        
         return imageView
     }
 }

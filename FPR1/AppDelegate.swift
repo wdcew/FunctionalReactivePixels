@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /** 配置SwiftyBeaver **/
         let console = ConsoleDestination()
-        console.colored = false
+        
         log.addDestination(console)
         
         return true

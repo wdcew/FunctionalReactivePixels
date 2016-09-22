@@ -22,6 +22,7 @@ public protocol FilterType : class {
     func apply(value: AnyObject) -> Bool
     func getTarget() -> Filter.TargetType
     func isRequired() -> Bool
+    func isExcluded() -> Bool
     func reachedMinLevel(level: SwiftyBeaver.Level) -> Bool
 }
 
@@ -43,6 +44,7 @@ public class Filter {
     public enum ComparisonType {
         case StartsWith([String], Bool)
         case Contains([String], Bool)
+        case Excludes([String], Bool)
         case EndsWith([String], Bool)
         case Equals([String], Bool)
     }
@@ -65,6 +67,10 @@ public class Filter {
         return self.required
     }
 
+    public func isExcluded() -> Bool {
+        return false
+    }
+
     /// returns true of set minLevel is >= as given level
     public func reachedMinLevel(level: SwiftyBeaver.Level) -> Bool {
         //print("checking if given level \(level) >= \(minLevel)")
@@ -76,14 +82,11 @@ public class Filter {
 /// starts with, contains or ends with a specific string. CompareFilters can be
 /// case sensitive.
 public class CompareFilter: Filter, FilterType {
+
+    private var filterComparisonType: Filter.ComparisonType?
+
     override public init(target: Filter.TargetType, required: Bool, minLevel: SwiftyBeaver.Level) {
         super.init(target: target, required: required, minLevel: minLevel)
-    }
-
-    public func apply(value: AnyObject) -> Bool {
-        guard let value = value as? String else {
-            return false
-        }
 
         let comparisonType: Filter.ComparisonType?
         switch self.getTarget() {
@@ -96,11 +99,18 @@ public class CompareFilter: Filter, FilterType {
         case let .Message(comparison):
             comparisonType = comparison
 
-        /*default:
-            comparisonType = nil*/
+            /*default:
+             comparisonType = nil*/
+        }
+        self.filterComparisonType = comparisonType
+    }
+
+    public func apply(value: AnyObject) -> Bool {
+        guard let value = value as? String else {
+            return false
         }
 
-        guard let filterComparisonType = comparisonType else {
+        guard let filterComparisonType = self.filterComparisonType else {
             return false
         }
 
@@ -113,6 +123,12 @@ public class CompareFilter: Filter, FilterType {
                         value.lowercaseString.containsString(string.lowercaseString)
                 }.isEmpty
 
+            case let .Excludes(strings, caseSensitive):
+                matches = !strings.filter {
+                    string in
+                    return caseSensitive ? !value.containsString(string) :
+                        !value.lowercaseString.containsString(string.lowercaseString)
+                }.isEmpty
 
             case let .StartsWith(strings, caseSensitive):
                 matches = !strings.filter {
@@ -138,6 +154,17 @@ public class CompareFilter: Filter, FilterType {
 
         return matches
     }
+
+    override public func isExcluded() -> Bool {
+        guard let filterComparisonType = self.filterComparisonType else { return false }
+
+        switch filterComparisonType {
+        case .Excludes(_, _):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 // Syntactic sugar for creating a function comparison filter
@@ -151,6 +178,12 @@ public class FunctionFilterFactory {
     public static func contains(strings: String..., caseSensitive: Bool = false,
                                 required: Bool = false, minLevel: SwiftyBeaver.Level = .Verbose) -> FilterType {
         return CompareFilter(target: .Function(.Contains(strings, caseSensitive)),
+                             required: required, minLevel: minLevel)
+    }
+
+    public static func excludes(strings: String..., caseSensitive: Bool = false,
+                                required: Bool = false, minLevel: SwiftyBeaver.Level = .Verbose) -> FilterType {
+        return CompareFilter(target: .Function(.Excludes(strings, caseSensitive)),
                              required: required, minLevel: minLevel)
     }
 
@@ -181,6 +214,12 @@ public class MessageFilterFactory {
                              required: required, minLevel: minLevel)
     }
 
+    public static func excludes(strings: String..., caseSensitive: Bool = false,
+                                required: Bool = false, minLevel: SwiftyBeaver.Level = .Verbose) -> FilterType {
+        return CompareFilter(target: .Message(.Excludes(strings, caseSensitive)),
+                             required: required, minLevel: minLevel)
+    }
+
     public static func endsWith(suffixes: String..., caseSensitive: Bool = false,
                                 required: Bool = false, minLevel: SwiftyBeaver.Level = .Verbose) -> FilterType {
         return CompareFilter(target: .Message(.EndsWith(suffixes, caseSensitive)),
@@ -205,6 +244,12 @@ public class PathFilterFactory {
     public static func contains(strings: String..., caseSensitive: Bool = false,
                                 required: Bool = false, minLevel: SwiftyBeaver.Level = .Verbose) -> FilterType {
         return CompareFilter(target: .Path(.Contains(strings, caseSensitive)),
+                             required: required, minLevel: minLevel)
+    }
+
+    public static func excludes(strings: String..., caseSensitive: Bool = false,
+                                required: Bool = false, minLevel: SwiftyBeaver.Level = .Verbose) -> FilterType {
+        return CompareFilter(target: .Path(.Excludes(strings, caseSensitive)),
                              required: required, minLevel: minLevel)
     }
 

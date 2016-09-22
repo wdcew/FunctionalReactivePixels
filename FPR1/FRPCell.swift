@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import ReactiveCocoa
-import Result
+import RxSwift
+import RxCocoa
 
 class FRPCell: UICollectionViewCell {
     weak var imagView: UIImageView?
@@ -23,15 +23,18 @@ class FRPCell: UICollectionViewCell {
         imagView = view
         backgroundColor = UIColor.darkGrayColor()
         
-        imagView!.rex_image <~ DynamicProperty.init(object: self, keyPath: "photoModel.thumbnailData")
-            .signal
-            .filterMap({ (value) -> UIImage? in
-                if let data = value {
-                    return UIImage.init(data: data as! NSData)
+        self.rx_observe(NSData.self, "photoModel.thumbnailData")
+            .map ({ (data) -> UIImage? in
+                if let data = data {
+                    return UIImage.init(data: data )
                 }
                 
                 return nil
             })
+            .subscribeNext ({[weak self] (image) in
+                self!.imagView?.image = image
+            })
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

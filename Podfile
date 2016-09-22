@@ -4,9 +4,11 @@
 target 'FPR1' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+  swift_version = '2.3'
   # Pods for FPR1
-  pod 'SwiftyBeaver'
+  pod 'RxCocoa'
+  pod 'RxSwift', '2.6.0'
+  pod 'SwiftyBeaver', '0.7.0'
   pod 'Rex', '~> 0.11.0'
   pod 'ReactiveCocoa'
   pod '500px-iOS-api'

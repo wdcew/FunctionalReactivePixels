@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '662115329755600633EA955B35B822C6'
+               BlueprintIdentifier = '74D8F4D50C9552E69A4121FCF413D855'
                BlueprintName = 'Rex'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Rex.framework'>

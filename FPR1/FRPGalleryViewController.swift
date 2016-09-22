@@ -39,13 +39,11 @@ class FRPGallerCollectionViewController: UICollectionViewController {
     
     //MARK: RAC configurable method
     func bindToProperty () {
-        /** binde photoArray，一旦其值发送变化，立即更新 **/
-        weak var weakSelf = self
-        viewModel.photoArray.producer.startWithNext { (arrays) in
-            let strongSelf = weakSelf
-            strongSelf?.collectionView?.reloadData()
-        }
         
+        viewModel.photoArray.asDriver()
+            .driveNext ({[weak self] _ in
+                self?.collectionView?.reloadData()
+                })
     }
     
     func RACDelegate () {

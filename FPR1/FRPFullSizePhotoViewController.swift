@@ -39,6 +39,7 @@ class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDele
         view.backgroundColor = UIColor.darkGrayColor()
         
         self.addChildViewController(pageViewController)
+        
         pageViewController.setViewControllers([photoViewController(forIndex: viewModel.initIndex)!],
                                                    direction: UIPageViewControllerNavigationDirection.Forward, animated: true) {$0}
         pageViewController.view.frame = view.bounds

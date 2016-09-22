@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A6AE06F62A82B0110EA889208E365C161CF95F97",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A6AE06F62A82B0110EA889208E365C161CF95F97" : 9223372036854775807,
+    "DE7C8CF7818E521AB528E9966CD45E1E87B06090" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "04BFF0A1-197F-483A-8158-A2D9C6CF8DAF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A6AE06F62A82B0110EA889208E365C161CF95F97" : "FPR1\/",
+    "DE7C8CF7818E521AB528E9966CD45E1E87B06090" : "..\/Swift-RAC-Macros"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FPR1",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FPR1.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wdcew\/FunctionalReactivePixels.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A6AE06F62A82B0110EA889208E365C161CF95F97"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ashfurrow\/Swift-RAC-Macros.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DE7C8CF7818E521AB528E9966CD45E1E87B06090"
+    }
+  ]
+}

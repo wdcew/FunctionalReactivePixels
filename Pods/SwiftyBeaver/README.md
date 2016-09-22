@@ -1,4 +1,4 @@
-<p align="center"><img src="https://cloud.githubusercontent.com/assets/564725/13137893/1b8eced2-d624-11e5-9264-3416ff821657.png" width="280" alt="SwiftyBeaver"><br/><b>Colorful</b>, extensible, <b>lightweight</b> logging for Swift 2 & 3.<br/>Great for <b>development & release</b> with support for Console, File & cloud platforms.<br/>NEW: Log <b>during release</b> to the conveniently built-in SwiftyBeaver Platform and Mac App!<br/><br/>
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/564725/13137893/1b8eced2-d624-11e5-9264-3416ff821657.png" width="280" alt="SwiftyBeaver"><br/><b>Colorful</b>, extensible, <b>lightweight</b> logging for Swift 2 & <a href="https://github.com/SwiftyBeaver/SwiftyBeaver/tree/swift3">Swift 3</a>.<br/>Great for <b>development & release</b> with support for Console, File & cloud platforms.<br/>NEW: Log <b>during release</b> to the conveniently built-in SwiftyBeaver Platform and Mac App!<br/><br/>
 
 <a href="http://docs.swiftybeaver.com">Docs</a> |
 <a href="https://swiftybeaver.com">Website</a> |
@@ -67,7 +67,7 @@ To use [CocoaPods](https://cocoapods.org) just add this to your Podfile:
 pod 'SwiftyBeaver'
 ```
 
-#### via Swift Package Manager (Swift 2.2)
+#### via Swift Package Manager
 
 To use SwiftyBeaver as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
 
@@ -96,13 +96,18 @@ let log = SwiftyBeaver.self
 
 ```
 
-At the the beginning of your `AppDelegate:didFinishLaunchingWithOptions()` add the SwiftyBeaver log destinations (console, file, etc.) and then you can already do the following log level calls globally (**colors included**):
+At the the beginning of your `AppDelegate:didFinishLaunchingWithOptions()` add the SwiftyBeaver log destinations (console, file, etc.), optionally adjust the [log format](http://docs.swiftybeaver.com//article/20-custom-format) and then you can already do the following log level calls globally:
 
 ``` Swift
 // add log destinations. at least one is needed!
 let console = ConsoleDestination()  // log to Xcode Console
 let file = FileDestination()  // log to default swiftybeaver.log file
 let cloud = SBPlatformDestination(appID: "foo", appSecret: "bar", encryptionKey: "123") // to cloud
+
+// reduce Console logging output to loglevel & message
+console.format = "$L: $M"
+
+// add the destinations to SwiftyBeaver
 log.addDestination(console)
 log.addDestination(file)
 log.addDestination(cloud)
@@ -141,6 +146,9 @@ log.error(["name": "Mr Beaver", "address": "7 Beaver Lodge"])
 - [Colored Logging to File](http://docs.swiftybeaver.com/article/10-log-to-file)
 - [Encrypted Logging & Analytics to SwiftyBeaver Platform](http://docs.swiftybeaver.com/article/11-log-to-swiftybeaver-platform)
 
+**Advanced Topics:**
+
+- [Custom Format](http://docs.swiftybeaver.com//article/20-custom-format)
 
 
 **Stay Informed:**

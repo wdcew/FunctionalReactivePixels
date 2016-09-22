@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import ReactiveCocoa
-import Result
-import YYModel
+import RxSwift
+import RxCocoa
 
 class FRPPhotoImporter: NSObject {
  typealias DictType = Dictionary<String, AnyObject>
@@ -21,29 +20,25 @@ class FRPPhotoImporter: NSObject {
         return PXRequest.apiHelper().urlRequestForPhotoID(model.identifier!.integerValue, photoSizes: PXPhotoModelSize.Large , commentsPage: -1)
     }
     
-    static func fetchDetailPhoto(model model: FRPPhotoModel) -> SignalProducer<NSData, NoError> {
+    static func fetchDetailPhoto(model: FRPPhotoModel) -> Observable<(NSData, NSHTTPURLResponse)> {
         let request = FRPPhotoImporter.detailPhotoURLRequest(model)
-        return NSURLSession.sharedSession().rac_dataWithRequest(request)
-            .map({ (data, response) in
-                let result = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! DictType
-                let photoinfo = result!["photo"] as! DictType
-                self.configureModel(model, witDictionary: photoinfo)
-                self.downloadFullimage(withModel: model)
-                
-                return data
-            })
-            .flatMapError({ (error) in
-                log.warning(error)
-                return SignalProducer.empty
-            })
+       
+        //将 冷信号，转为热信号
+        let connection = NSURLSession.sharedSession().rx_response(request).shareReplay(1)
+        connection.subscribeNext { (data, respose) in
+            let result = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! DictType
+            let photoinfo = result!["photo"] as! DictType
+            self.configureModel(model, witDictionary: photoinfo)
+            self.downloadFullimage(withModel: model)
+        }
+        return connection
     }
     
-    static func importPhotos() -> SignalProducer<[FRPPhotoModel],NSError> {
-        let (singal, observer) = Signal<[FRPPhotoModel], NSError>.pipe()
-        let producer = SignalProducer.init(signal: singal).replayLazily(1)
+    static func importPhotos() -> Observable<[FRPPhotoModel]> {
         let request = self.popualUrlRequest()
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) in
-            if let vaildData = data {
+        let connection = NSURLSession.sharedSession().rx_response(request)
+            .shareReplay(1)
+            .map { (vaildData, response) -> [FRPPhotoModel] in
                 let result = try? NSJSONSerialization.JSONObjectWithData(vaildData, options: NSJSONReadingOptions.MutableContainers) as! DictType
                 
                 let photos = result!["photos"] as! Array<AnyObject>
@@ -56,16 +51,9 @@ class FRPPhotoImporter: NSObject {
                         
                         return model
                     })
-                //订阅者发送数据
-                observer.sendNext(models)
-                observer.sendCompleted()
-            } else {
-                //数据错误
-                observer.sendFailed(error!)
-                
-            }
+                return models
         }
-        return producer
+        return connection
     }
     
     static func configureModel(model: FRPPhotoModel, witDictionary dict: DictType) {
@@ -93,30 +81,29 @@ class FRPPhotoImporter: NSObject {
     
     static func downloadFullimage(withModel model: FRPPhotoModel) {
         download(URL: model.fullsizedURL!)
-            .startWithNext { (data) in
+            .subscribeNext({ (data, response) in
                 model.fullsizedData = data
-        }
+            })
     }
     
     static func downloadThumbnail(withModel model: FRPPhotoModel) {
         download(URL: model.thumbnailURL)
-            .startWithNext { (data) in
+            .subscribeNext({ (data, response) in
+                
                 model.thumbnailData = data
-        }
+            })
     }
     
-    private class func download(URL str: String?) -> SignalProducer<NSData,NoError> {
-        guard let url = str else {return SignalProducer.empty}
+    private class func download(URL str: String?) -> Observable<(NSData, NSHTTPURLResponse)> {
+        
+        guard let url = str else {return Observable.empty()}
         let request = NSURLRequest(URL: NSURL.init(string: url)!)
-        return NSURLSession.sharedSession().rac_dataWithRequest(request)
-            .map({ (data, response) in
-                return data
-            })
-            .flatMapError() {
+        let connect = NSURLSession.sharedSession().rx_response(request).shareReplay(1)
+        connect.subscribeError({ (error) in
                 //下载数据错误返回空的Singal
-                log.warning($0)
-                return SignalProducer.empty
-            }
-            .observeOn(UIScheduler())
+                log.warning(error)
+            })
+        return connect
     }
+    
 }
