@@ -13,7 +13,7 @@ import RxCocoa
 class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
     //MARK: store property
     var index: Int?
-    private var ViewModel: FRPPhotoViewModel
+    fileprivate var ViewModel: FRPPhotoViewModel
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView.init(frame: self.view.bounds)
@@ -24,14 +24,14 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
         view.showsVerticalScrollIndicator = false
         view.delegate = self
         
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.black
         return view
     }()
     
     lazy var imageView: UIImageView = {
         let view = UIImageView(frame: self.scrollView.bounds)
-        view.backgroundColor = UIColor.blackColor()
-        view.contentMode = UIViewContentMode.ScaleAspectFit
+        view.backgroundColor = UIColor.black
+        view.contentMode = UIViewContentMode.scaleAspectFit
         
         return view
     }()
@@ -58,22 +58,22 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(imageView)
         
         /* View Bind */
-        ViewModel.fullImage.asObservable()
+       _ = ViewModel.fullImage.asObservable()
             .observeOn(MainScheduler.instance)
-            .bindTo(imageView.rx_image)
+            .bindTo(imageView.rx.image)
         
-        ViewModel.loading
+        _ = ViewModel.loading
             .observeOn(MainScheduler.instance)
-            .subscribeNext{ (bool) in
+            .subscribe(onNext: ({ (bool) in
                 if bool {
                     SVProgressHUD.show()
                 } else {
                     SVProgressHUD.dismiss()
                 }
-        }
+            }))
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 }
@@ -81,7 +81,7 @@ class FRPPhotoViewController: UIViewController, UIScrollViewDelegate {
 //MARK: - ScrollView Delegate
 typealias ScrollViewDelegate = FRPPhotoViewController
 extension ScrollViewDelegate {
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    @objc(viewForZoomingInScrollView:) func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         
         return imageView
     }

@@ -1,4 +1,4 @@
-<p align="center"><img src="https://cloud.githubusercontent.com/assets/564725/13137893/1b8eced2-d624-11e5-9264-3416ff821657.png" width="280" alt="SwiftyBeaver"><br/><b>Colorful</b>, extensible, <b>lightweight</b> logging for Swift 2 & <a href="https://github.com/SwiftyBeaver/SwiftyBeaver/tree/swift3">Swift 3</a>.<br/>Great for <b>development & release</b> with support for Console, File & cloud platforms.<br/>NEW: Log <b>during release</b> to the conveniently built-in SwiftyBeaver Platform and Mac App!<br/><br/>
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/564725/13137893/1b8eced2-d624-11e5-9264-3416ff821657.png" width="280" alt="SwiftyBeaver"><br/><b>Colorful</b>, flexible, <b>lightweight</b> logging for Swift 2 & <b>Swift 3</b>.<br/>Great for <b>development & release</b> with support for Console, File & cloud platforms.<br/>NEW: Log <b>during release</b> to the conveniently built-in SwiftyBeaver Platform and Mac App!<br/><br/>
 
 <a href="http://docs.swiftybeaver.com">Docs</a> |
 <a href="https://swiftybeaver.com">Website</a> |
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-[![Language Swift 2 & 3](https://img.shields.io/badge/Language-Swift%202%20&%203-orange.svg)](https://developer.apple.com/swift) [![Travis Build Status](https://travis-ci.org/SwiftyBeaver/SwiftyBeaver.svg?branch=master)](https://travis-ci.org/SwiftyBeaver/SwiftyBeaver) [![Slack Status](https://slack.swiftybeaver.com/badge.svg)](https://slack.swiftybeaver.com) 
+[![Language Swift 3](https://img.shields.io/badge/Language-Swift%202%20&%203-orange.svg)](https://swift.org) [![Travis Build Status](https://travis-ci.org/SwiftyBeaver/SwiftyBeaver.svg)](https://travis-ci.org/SwiftyBeaver/SwiftyBeaver) [![Slack Status](https://slack.swiftybeaver.com/badge.svg)](https://slack.swiftybeaver.com) 
 <br/>
 <p>
 ----
@@ -18,17 +18,17 @@
 
 ### During Development: Colored Logging to Xcode Console
 
-<img src="https://cloud.githubusercontent.com/assets/564725/14951113/ea682b42-1056-11e6-824f-a6da82e2a0a8.png" width="637">
+<img src="https://cloud.githubusercontent.com/assets/564725/18608323/ac065a98-7ce6-11e6-8e1b-2a062d54a1d5.png" width="608">
 
-[Learn more](http://docs.swiftybeaver.com/article/9-log-to-xcode-console) about colored logging to Xcode Console.
+[Learn more](http://docs.swiftybeaver.com/article/9-log-to-xcode-console) about colored logging to Xcode 8 Console. **No need to hack Xcode 8 anymore** to get color. You can even customize the log level word (ATTENTION instead of ERROR maybe?), the general amount of displayed data and if you want to use the 💜s or replace them with something else 😉
 
 <br/>
 
 ### During Development: Colored Logging to File
 
-<img src="https://cloud.githubusercontent.com/assets/564725/14951092/d5948f44-1056-11e6-9f6e-81801a130661.png" width="659">
+<img src="https://cloud.githubusercontent.com/assets/564725/18608325/b7ecd4c2-7ce6-11e6-829b-7f8f9fe6ef2f.png" width="738">
 
-[Learn more](http://docs.swiftybeaver.com/article/10-log-to-file) about logging to file.
+[Learn more](http://docs.swiftybeaver.com/article/10-log-to-file) about logging to file which is great for Terminal.app fans or to store logs on disk.
 
 <br/>
 
@@ -37,7 +37,7 @@
 
 <img src="https://cloud.githubusercontent.com/assets/564725/14281408/38d6a6ba-fb39-11e5-9584-34e3679bb1c5.jpg" width="700">
 
-[Learn more](http://docs.swiftybeaver.com/article/11-log-to-swiftybeaver-platform) about logging to the SwiftyBeaver Platform during release.
+[Learn more](http://docs.swiftybeaver.com/article/11-log-to-swiftybeaver-platform) about logging to the SwiftyBeaver Platform **during release!**
 
 <br/>
 
@@ -48,40 +48,66 @@
 
 Conveniently access your logs during development & release with our [free Mac App](https://swiftybeaver.com).
 
-<br/>
+<br/><br/>
 
 
 ## Installation
 
+- For **Swift 3** install the latest SwiftyBeaver version
+- For **Swift 2** install SwiftyBeaver 0.7.0
+
+<br/>
+### Carthage
+
 You can use [Carthage](https://github.com/Carthage/Carthage) to install SwiftyBeaver by adding that to your Cartfile:
 
-``` 
+Swift 3:
+``` Swift
 github "SwiftyBeaver/SwiftyBeaver"
 ```
 
-#### via CocoaPods
+Swift 2:
+``` Swift
+github "SwiftyBeaver/SwiftyBeaver" ~> 0.7
+```
+
+<br/>
+### CocoaPods
 
 To use [CocoaPods](https://cocoapods.org) just add this to your Podfile:
 
-``` Ruby
+Swift 3:
+``` Swift
 pod 'SwiftyBeaver'
 ```
 
-#### via Swift Package Manager
+Swift 2:
+``` Ruby
+target 'MyProject' do
+  use_frameworks!
 
-To use SwiftyBeaver as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
+  # Pods for MyProject
+  pod 'SwiftyBeaver', '~> 0.7'
+end
 
-``` Swift
-import PackageDescription
-
-let package = Package(
-  name: "HelloWorld",
-  dependencies: [
-    .Package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", majorVersion: 0)
-  ]
-)
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    # Configure Pod targets for Xcode 8 with Swift 2.3
+    config.build_settings['SWIFT_VERSION'] = '2.3'
+  end
+end
 ```
 
+<br/>
+### Swift Package Manager
+
+For [Swift Package Manager](https://swift.org/package-manager/) add the following package to your Package.swift file. Just Swift 3 is supported:
+
+``` Swift
+.Package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", majorVersion: 1)
+```
+
+<br/>
 <br/>
 
 
@@ -91,7 +117,6 @@ Add that near the top of your `AppDelegate.swift` to be able to use SwiftyBeaver
 
 ``` Swift
 import SwiftyBeaver
-
 let log = SwiftyBeaver.self
 
 ```
@@ -104,8 +129,8 @@ let console = ConsoleDestination()  // log to Xcode Console
 let file = FileDestination()  // log to default swiftybeaver.log file
 let cloud = SBPlatformDestination(appID: "foo", appSecret: "bar", encryptionKey: "123") // to cloud
 
-// reduce Console logging output to loglevel & message
-console.format = "$L: $M"
+// use custom format and set console output to short time, log level & message
+console.format = "$DHH:mm:ss$d $L $M"
 
 // add the destinations to SwiftyBeaver
 log.addDestination(console)
@@ -122,14 +147,13 @@ log.error("ouch, an error did occur!")  // prio 5, ERROR in red
 // log anything!
 log.verbose(123)
 log.info(-123.45678)
-log.warning(NSDate())
+log.warning(Date())
 log.error(["I", "like", "logs!"])
 log.error(["name": "Mr Beaver", "address": "7 Beaver Lodge"])
 ```
 
 <br/>
-
-----
+<br/>
 
 ## Documentation
 
@@ -148,8 +172,7 @@ log.error(["name": "Mr Beaver", "address": "7 Beaver Lodge"])
 
 **Advanced Topics:**
 
-- [Custom Format](http://docs.swiftybeaver.com//article/20-custom-format)
-
+- [Custom Format](http://docs.swiftybeaver.com/article/20-custom-format)
 
 **Stay Informed:**
 

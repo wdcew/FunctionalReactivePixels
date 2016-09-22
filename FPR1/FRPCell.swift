@@ -21,9 +21,9 @@ class FRPCell: UICollectionViewCell {
         let view = UIImageView(frame: bounds)
         self.contentView.addSubview(view)
         imagView = view
-        backgroundColor = UIColor.darkGrayColor()
+        backgroundColor = UIColor.darkGray
         
-        self.rx_observe(NSData.self, "photoModel.thumbnailData")
+        _ = self.rx.observe(Data.self, "photoModel.thumbnailData")
             .map ({ (data) -> UIImage? in
                 if let data = data {
                     return UIImage.init(data: data )
@@ -31,7 +31,7 @@ class FRPCell: UICollectionViewCell {
                 
                 return nil
             })
-            .subscribeNext ({[weak self] (image) in
+            .subscribe (onNext: {[weak self] (image) in
                 self!.imagView?.image = image
             })
         

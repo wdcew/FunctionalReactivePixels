@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ReactiveCocoa
 import SVProgressHUD
 
 class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
@@ -15,7 +14,7 @@ class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDele
     var viewModel: FRPFullSizePhotoViewModel
     
     lazy var pageViewController: UIPageViewController = {
-        let vc = UIPageViewController.init(transitionStyle:.Scroll, navigationOrientation: .Horizontal,
+        let vc = UIPageViewController.init(transitionStyle:.scroll, navigationOrientation: .horizontal,
                                            options: [UIPageViewControllerOptionInterPageSpacingKey : 30])
         vc.delegate = self
         vc.dataSource = self
@@ -36,12 +35,12 @@ class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.darkGrayColor()
+        view.backgroundColor = UIColor.darkGray
         
         self.addChildViewController(pageViewController)
         
         pageViewController.setViewControllers([photoViewController(forIndex: viewModel.initIndex)!],
-                                                   direction: UIPageViewControllerNavigationDirection.Forward, animated: true) {$0}
+                                                   direction: UIPageViewControllerNavigationDirection.forward, animated: true)
         pageViewController.view.frame = view.bounds
         view.addSubview(pageViewController.view)
         
@@ -56,11 +55,11 @@ class FRPFullSizePhotoViewController: UIViewController, UIPageViewControllerDele
    //MARK: - UIPageViewControllerDataSource
 typealias PageViewControllerDataSource = FRPFullSizePhotoViewController
 extension PageViewControllerDataSource {
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    @objc(pageViewController:viewControllerAfterViewController:) func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         return self.photoViewController(forIndex: viewModel.initIndex + 1)
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    @objc(pageViewController:viewControllerBeforeViewController:) func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return self.photoViewController(forIndex: viewModel.initIndex - 1)
     }
     
@@ -70,7 +69,7 @@ extension PageViewControllerDataSource {
 typealias PageViewControllerDelegate = FRPFullSizePhotoViewController
 extension PageViewControllerDelegate {
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool,
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
 //        pageViewController.viewControllers?.first?.title = pageViewController.viewControllers?.first as!
     }

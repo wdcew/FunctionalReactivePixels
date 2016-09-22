@@ -18,22 +18,19 @@ public class ConsoleDestination: BaseDestination {
     public override init() {
         super.init()
 
-        #if swift(>=2.3)
-        #else
-            levelColor.Verbose = "fg150,178,193;"     // silver
-            levelColor.Debug = "fg32,155,124;"        // green
-            levelColor.Info = "fg70,204,221;"         // blue
-            levelColor.Warning = "fg253,202,78;"      // yellow
-            levelColor.Error = "fg243,36,73;"         // red
-            reset = "\u{001b}[;"
-            escape = "\u{001b}["
-        #endif
+        // use colored Emojis for better visual distinction
+        // of log level for Xcode 8
+        levelColor.verbose = "💜 "     // silver
+        levelColor.debug = "💚 "        // green
+        levelColor.info = "💙 "         // blue
+        levelColor.warning = "💛 "     // yellow
+        levelColor.error = "❤️ "       // red
     }
 
     // print to Xcode Console. uses full base class functionality
-    override public func send(level: SwiftyBeaver.Level, msg: String, thread: String,
-        path: String, function: String, line: Int) -> String? {
-        let formattedString = super.send(level, msg: msg, thread: thread, path: path, function: function, line: line)
+    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
+        file: String, function: String, line: Int) -> String? {
+        let formattedString = super.send(level, msg: msg, thread: thread, file: file, function: function, line: line)
 
         if let str = formattedString {
             if useNSLog {
@@ -44,4 +41,5 @@ public class ConsoleDestination: BaseDestination {
         }
         return formattedString
     }
+
 }

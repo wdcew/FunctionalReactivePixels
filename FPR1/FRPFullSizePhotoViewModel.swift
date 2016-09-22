@@ -19,7 +19,7 @@ class FRPFullSizePhotoViewModel: NSObject {
         self.photoName = array[index].photoName
     }
     
-    func photoModelAtIndex(index index: Int) -> FRPPhotoModel?
+    func photoModelAtIndex(index: Int) -> FRPPhotoModel?
     {
         if index < 0 || index > photoModels.count - 1 {
             return nil

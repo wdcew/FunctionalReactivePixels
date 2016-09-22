@@ -12,34 +12,35 @@ import RxCocoa
 class FRPPhotoImporter: NSObject {
  typealias DictType = Dictionary<String, AnyObject>
     
-    private static func popualUrlRequest () -> NSURLRequest {
-        return PXRequest.apiHelper().urlRequestForPhotoFeature(PXAPIHelperPhotoFeature.Popular, resultsPerPage: 100, page: 0, photoSizes: PXPhotoModelSize.Thumbnail, sortOrder: PXAPIHelperSortOrder.Rating, except: PXPhotoModelCategory.PXPhotoModelCategoryNude)
+    fileprivate static func popualUrlRequest () -> URLRequest {
+        return PXRequest.apiHelper().urlRequest(for: PXAPIHelperPhotoFeature.popular, resultsPerPage: 100, page: 0, photoSizes: PXPhotoModelSize.thumbnail, sortOrder: PXAPIHelperSortOrder.rating, except: PXPhotoModelCategory.PXPhotoModelCategoryNude)
     }
     
-    private static func detailPhotoURLRequest(model: FRPPhotoModel) -> NSURLRequest {
-        return PXRequest.apiHelper().urlRequestForPhotoID(model.identifier!.integerValue, photoSizes: PXPhotoModelSize.Large , commentsPage: -1)
+    fileprivate static func detailPhotoURLRequest(_ model: FRPPhotoModel) -> URLRequest {
+        return PXRequest.apiHelper().urlRequest(forPhotoID: model.identifier!.intValue, photoSizes: PXPhotoModelSize.large , commentsPage: -1)
     }
     
-    static func fetchDetailPhoto(model: FRPPhotoModel) -> Observable<(NSData, NSHTTPURLResponse)> {
+    static func fetchDetailPhoto(_ model: FRPPhotoModel) -> Observable<(Data, HTTPURLResponse)> {
         let request = FRPPhotoImporter.detailPhotoURLRequest(model)
        
         //将 冷信号，转为热信号
-        let connection = NSURLSession.sharedSession().rx_response(request).shareReplay(1)
-        connection.subscribeNext { (data, respose) in
-            let result = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! DictType
+        let connection = URLSession.shared.rx.response(request).shareReplay(1)
+        _ = connection
+            .subscribe(onNext: { (data, respose) in
+            let result = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as! DictType
             let photoinfo = result!["photo"] as! DictType
             self.configureModel(model, witDictionary: photoinfo)
             self.downloadFullimage(withModel: model)
-        }
+        })
         return connection
     }
     
     static func importPhotos() -> Observable<[FRPPhotoModel]> {
         let request = self.popualUrlRequest()
-        let connection = NSURLSession.sharedSession().rx_response(request)
+        let connection = URLSession.shared.rx.response(request)
             .shareReplay(1)
             .map { (vaildData, response) -> [FRPPhotoModel] in
-                let result = try? NSJSONSerialization.JSONObjectWithData(vaildData, options: NSJSONReadingOptions.MutableContainers) as! DictType
+                let result = try? JSONSerialization.jsonObject(with: vaildData, options: JSONSerialization.ReadingOptions.mutableContainers) as! DictType
                 
                 let photos = result!["photos"] as! Array<AnyObject>
                 let models = photos
@@ -56,7 +57,7 @@ class FRPPhotoImporter: NSObject {
         return connection
     }
     
-    static func configureModel(model: FRPPhotoModel, witDictionary dict: DictType) {
+    static func configureModel(_ model: FRPPhotoModel, witDictionary dict: DictType) {
         model.photoName = dict["name"] as? String
         model.identifier = dict["id"] as? NSNumber
         let user = dict["user"] as! NSDictionary
@@ -72,7 +73,7 @@ class FRPPhotoImporter: NSObject {
         }
     }
     
-    static func urlForImageSize(imageSize: Int, inDictionary imags: Array<DictType>) -> String {
+    static func urlForImageSize(_ imageSize: Int, inDictionary imags: Array<DictType>) -> String {
         let image = imags
             .filter {($0["size"] as! Int) <= imageSize}
             .map {$0["url"]}.first
@@ -80,26 +81,26 @@ class FRPPhotoImporter: NSObject {
     }
     
     static func downloadFullimage(withModel model: FRPPhotoModel) {
-        download(URL: model.fullsizedURL!)
-            .subscribeNext({ (data, response) in
-                model.fullsizedData = data
+        _ = download(URL: model.fullsizedURL!)
+            .subscribe(onNext: { (data, response) in
+                model.fullsizedData = data as Data
             })
     }
     
     static func downloadThumbnail(withModel model: FRPPhotoModel) {
-        download(URL: model.thumbnailURL)
-            .subscribeNext({ (data, response) in
+        _ = download(URL: model.thumbnailURL)
+            .subscribe(onNext: { (data, response) in
                 
-                model.thumbnailData = data
+                model.thumbnailData = data as Data
             })
     }
     
-    private class func download(URL str: String?) -> Observable<(NSData, NSHTTPURLResponse)> {
+    fileprivate class func download(URL str: String?) -> Observable<(Data, HTTPURLResponse)> {
         
         guard let url = str else {return Observable.empty()}
-        let request = NSURLRequest(URL: NSURL.init(string: url)!)
-        let connect = NSURLSession.sharedSession().rx_response(request).shareReplay(1)
-        connect.subscribeError({ (error) in
+        let request = URLRequest(url: URL.init(string: url)!)
+        let connect = URLSession.shared.rx.response(request).shareReplay(1)
+        _ = connect.subscribe(onError: { (error) in
                 //下载数据错误返回空的Singal
                 log.warning(error)
             })

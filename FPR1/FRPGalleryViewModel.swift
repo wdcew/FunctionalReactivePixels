@@ -23,7 +23,7 @@ class FRPGalleryViewModel: NSObject {
     }
     /** 获取 photos model **/
     func downloadPhtosModel() {
-        FRPPhotoImporter.importPhotos()
+       _ = FRPPhotoImporter.importPhotos()
             .bindTo(photoArray)
         
         

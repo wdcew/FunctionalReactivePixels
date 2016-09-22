@@ -23,7 +23,8 @@ class FRPPhotoViewModel: NSObject {
         /** 获取fullPhto 的data **/
         downloadPhotoData()
         /** bind **/
-        model.rx_observeWeakly(NSData.self, "fullsizedData")
+        
+       _ = model.rx.observeWeakly(Data.self, "fullsizedData")
             .map({ (data) -> UIImage? in
                 if let data = data {
                     return UIImage.init(data: data)
@@ -34,8 +35,8 @@ class FRPPhotoViewModel: NSObject {
     }
     
     func downloadPhotoData() {
-        FRPPhotoImporter.fetchDetailPhoto(photoModel)
-            .subscribeNext ({[weak self] _ in
+        _ = FRPPhotoImporter.fetchDetailPhoto(photoModel)
+            .subscribe (onNext: {[weak self] _ in
                 self?.loading.onNext(false)
                 })
             

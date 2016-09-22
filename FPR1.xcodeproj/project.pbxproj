@@ -11,7 +11,6 @@
 		3CD61040B551614334517628 /* Pods_FPR1UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9940C04588A315F8E54720D5 /* Pods_FPR1UITests.framework */; };
 		7D8E2B0D58B8E6BABC4395AE /* Pods_FPR1Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E05DF809BB48BAE9950AF4 /* Pods_FPR1Tests.framework */; };
 		9007EB6D1D740E090046403A /* FRPCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9007EB6C1D740E090046403A /* FRPCell.swift */; };
-		9007EB6F1D7425F70046403A /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9007EB6E1D7425F70046403A /* ReactiveCocoaBindings.swift */; };
 		90591B0F1D756D6B004B8C08 /* FRPPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90591B0E1D756D6B004B8C08 /* FRPPhotoViewController.swift */; };
 		906541BE1D714F8000C6497A /* FRPGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906541B91D714F8000C6497A /* FRPGalleryViewController.swift */; };
 		906541BF1D714F8000C6497A /* FRPGalleryFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906541BA1D714F8000C6497A /* FRPGalleryFlowLayout.swift */; };
@@ -25,7 +24,6 @@
 		906541DB1D7151C500C6497A /* PXAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 906541D01D7151C500C6497A /* PXAPIHelper.m */; };
 		906541DC1D7151C500C6497A /* PXRequest+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 906541D21D7151C500C6497A /* PXRequest+Creation.m */; };
 		906541DD1D7151C500C6497A /* PXRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 906541D41D7151C500C6497A /* PXRequest.m */; };
-		906541DE1D7151C500C6497A /* README.markdown in Sources */ = {isa = PBXBuildFile; fileRef = 906541D51D7151C500C6497A /* README.markdown */; };
 		9093C59F1D752B7000A07B72 /* FRPFullSizePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093C59E1D752B7000A07B72 /* FRPFullSizePhotoViewController.swift */; };
 		9097733F1D714A39007C85B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097733E1D714A39007C85B1 /* AppDelegate.swift */; };
 		909773411D714A39007C85B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909773401D714A39007C85B1 /* ViewController.swift */; };
@@ -65,7 +63,6 @@
 		4FF0094984ED56CF67F6F2ED /* Pods-FPR1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FPR1Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FPR1Tests/Pods-FPR1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		5ECB96C7E59B98720F268955 /* Pods-FPR1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FPR1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FPR1/Pods-FPR1.debug.xcconfig"; sourceTree = "<group>"; };
 		9007EB6C1D740E090046403A /* FRPCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPCell.swift; sourceTree = "<group>"; };
-		9007EB6E1D7425F70046403A /* ReactiveCocoaBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactiveCocoaBindings.swift; path = "../../../Swift-RAC-Macros/ReactiveCocoaBindings.swift"; sourceTree = "<group>"; };
 		9038BBA01D7737200072A423 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/ReactiveCocoa/ReactiveCocoa.framework"; sourceTree = "<group>"; };
 		9038BBA11D7737200072A423 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/Result/Result.framework"; sourceTree = "<group>"; };
 		9038BBA21D7737200072A423 /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rex.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/Rex/Rex.framework"; sourceTree = "<group>"; };
@@ -95,7 +92,6 @@
 		906541D21D7151C500C6497A /* PXRequest+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXRequest+Creation.m"; sourceTree = "<group>"; };
 		906541D31D7151C500C6497A /* PXRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXRequest.h; sourceTree = "<group>"; };
 		906541D41D7151C500C6497A /* PXRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXRequest.m; sourceTree = "<group>"; };
-		906541D51D7151C500C6497A /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
 		9093C59E1D752B7000A07B72 /* FRPFullSizePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPFullSizePhotoViewController.swift; sourceTree = "<group>"; };
 		9097733B1D714A39007C85B1 /* FPR1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FPR1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9097733E1D714A39007C85B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,7 +146,6 @@
 			children = (
 				906541C31D7151C500C6497A /* LICENSE */,
 				906541C41D7151C500C6497A /* PXAPI */,
-				906541D51D7151C500C6497A /* README.markdown */,
 			);
 			path = "500px-iOS-api";
 			sourceTree = "<group>";
@@ -257,7 +252,6 @@
 				9097733E1D714A39007C85B1 /* AppDelegate.swift */,
 				909773401D714A39007C85B1 /* ViewController.swift */,
 				906541B81D714F8000C6497A /* FPR1-Bridging-Header.h */,
-				9007EB6E1D7425F70046403A /* ReactiveCocoaBindings.swift */,
 				909773421D714A39007C85B1 /* Main.storyboard */,
 				909773451D714A39007C85B1 /* Assets.xcassets */,
 				909773471D714A39007C85B1 /* LaunchScreen.storyboard */,
@@ -391,15 +385,18 @@
 					9097733A1D714A39007C85B1 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 6PPZ4N88W2;
+						LastSwiftMigration = 0800;
 					};
 					9097734E1D714A39007C85B1 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 6PPZ4N88W2;
+						LastSwiftMigration = 0800;
 						TestTargetID = 9097733A1D714A39007C85B1;
 					};
 					909773591D714A3A007C85B1 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 6PPZ4N88W2;
+						LastSwiftMigration = 0800;
 						TestTargetID = 9097733A1D714A39007C85B1;
 					};
 				};
@@ -602,7 +599,6 @@
 				90591B0F1D756D6B004B8C08 /* FRPPhotoViewController.swift in Sources */,
 				909773411D714A39007C85B1 /* ViewController.swift in Sources */,
 				906541C11D714F8000C6497A /* FRPPhotoModel.m in Sources */,
-				906541DE1D7151C500C6497A /* README.markdown in Sources */,
 				906541BE1D714F8000C6497A /* FRPGalleryViewController.swift in Sources */,
 				906541DB1D7151C500C6497A /* PXAPIHelper.m in Sources */,
 				906541D71D7151C500C6497A /* NSData+Base64.m in Sources */,
@@ -612,7 +608,6 @@
 				9093C59F1D752B7000A07B72 /* FRPFullSizePhotoViewController.swift in Sources */,
 				9007EB6D1D740E090046403A /* FRPCell.swift in Sources */,
 				9097733F1D714A39007C85B1 /* AppDelegate.swift in Sources */,
-				9007EB6F1D7425F70046403A /* ReactiveCocoaBindings.swift in Sources */,
 				906541D91D7151C500C6497A /* OAuthCore.m in Sources */,
 				906541BF1D714F8000C6497A /* FRPGalleryFlowLayout.swift in Sources */,
 				906541D81D7151C500C6497A /* OAuth+Additions.m in Sources */,
@@ -714,7 +709,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = "";
 				d = "";
 				df = "";
 			};
@@ -757,7 +752,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 				d = "";
 				df = "";
@@ -768,15 +763,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5ECB96C7E59B98720F268955 /* Pods-FPR1.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FPR1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wdcew.FPR1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FPR1/FPR1-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -784,14 +781,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C43805291F6A25468623A58 /* Pods-FPR1.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FPR1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wdcew.FPR1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FPR1/FPR1-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -804,6 +803,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wdcew.FPR1Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FPR1.app/FPR1";
 			};
 			name = Debug;
@@ -817,6 +817,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wdcew.FPR1Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FPR1.app/FPR1";
 			};
 			name = Release;
@@ -829,6 +830,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wdcew.FPR1UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FPR1;
 			};
 			name = Debug;
@@ -841,6 +843,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wdcew.FPR1UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FPR1;
 			};
 			name = Release;

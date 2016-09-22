@@ -416,7 +416,7 @@
         [options setValue:@"delete" forKey:@"_method"];
     }
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/photos/%d/favorite", self.host, photoID];
+    NSString *urlString = [NSString stringWithFormat:@"%@/photos/%ld/favorite", self.host, (long)photoID];
     NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [mutableRequest setHTTPMethod:@"POST"];
     
@@ -451,7 +451,7 @@
     
     NSDictionary *options = @{ @"vote" : @(1) };
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/photos/%d/vote", self.host, photoID];
+    NSString *urlString = [NSString stringWithFormat:@"%@/photos/%ld/vote", self.host, (long)photoID];
     NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [mutableRequest setHTTPMethod:@"POST"];
     
@@ -481,7 +481,7 @@
     //Need to URL-encode first so the servers don't reject it
     NSDictionary *options = @{ @"body" : [comment ab_RFC3986EncodedString] };
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/photos/%d/comments", self.host, photoID];
+    NSString *urlString = [NSString stringWithFormat:@"%@/photos/%ld/comments", self.host, (long)photoID];
     NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [mutableRequest setHTTPMethod:@"POST"];
     
@@ -746,14 +746,14 @@
     
     if (self.authMode == PXAPIHelperModeNoAuth)
     {
-        NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/photos/%d?consumer_key=%@",
+        NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/photos/%ld?consumer_key=%@",
                                       self.host,
-                                      photoID,
+                                      (long)photoID,
                                       self.consumerKey];
         
         if (commentPage > 0)
         {
-            [urlString appendFormat:@"&comments=1&comments_page=%d", commentPage];
+            [urlString appendFormat:@"&comments=1&comments_page=%ld", (long)commentPage];
         }
         
         for (NSString *imageSizeString in imageSizeArray)
@@ -765,7 +765,7 @@
     }
     else if (self.authMode == PXAPIHelperModeOAuth)
     {
-        NSString *urlString = [NSString stringWithFormat:@"%@/photos/%d",self.host, photoID];
+        NSString *urlString = [NSString stringWithFormat:@"%@/photos/%ld",self.host, (long)photoID];
         mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
         [mutableRequest setHTTPMethod:@"GET"];
         
@@ -773,7 +773,7 @@
         
         if (commentPage > 0)
         {
-            [paramsAsString appendFormat:@"comments=1&comments_page=%d&", commentPage];
+            [paramsAsString appendFormat:@"comments=1&comments_page=%ld&", (long)commentPage];
         }
         
         if (imageSizeArray.count == 1)
@@ -803,12 +803,12 @@
 {
     if (self.authMode == PXAPIHelperModeNoAuth) return nil; //Requires authentication
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/photos/%d/report", self.host, photoID];
+    NSString *urlString = [NSString stringWithFormat:@"%@/photos/%ld/report", self.host, (long)photoID];
     NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [mutableRequest setHTTPMethod:@"POST"];
     
     NSMutableString *paramsAsString = [[NSMutableString alloc] init];
-    [paramsAsString appendFormat:@"reason=%d", reason];
+    [paramsAsString appendFormat:@"reason=%ld", (long)reason];
     
     NSData *bodyData = [paramsAsString dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -1133,9 +1133,9 @@
     
     if (self.authMode == PXAPIHelperModeNoAuth)
     {
-        NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/users/%d/friends?consumer_key=%@",
+        NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/users/%ld/friends?consumer_key=%@",
                                       self.host,
-                                      userID,
+                                      (long)userID,
                                       self.consumerKey];
         
         for (id key in options.allKeys)
@@ -1147,7 +1147,7 @@
     }
     else if (self.authMode == PXAPIHelperModeOAuth)
     {
-        NSString *urlString = [NSString stringWithFormat:@"%@/users/%d/friends", self.host, userID];
+        NSString *urlString = [NSString stringWithFormat:@"%@/users/%ld/friends", self.host, (long)userID];
         mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
         [mutableRequest setHTTPMethod:@"GET"];
         
@@ -1180,9 +1180,9 @@
     
     if (self.authMode == PXAPIHelperModeNoAuth)
     {
-        NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/users/%d/followers?consumer_key=%@",
+        NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/users/%ld/followers?consumer_key=%@",
                                       self.host,
-                                      userID,
+                                      (long)userID,
                                       self.consumerKey];
         
         for (id key in options.allKeys)
@@ -1194,7 +1194,7 @@
     }
     else if (self.authMode == PXAPIHelperModeOAuth)
     {
-        NSString *urlString = [NSString stringWithFormat:@"%@/users/%d/followers", self.host, userID];
+        NSString *urlString = [NSString stringWithFormat:@"%@/users/%ld/followers", self.host, (long)userID];
         mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
         [mutableRequest setHTTPMethod:@"GET"];
         
@@ -1227,7 +1227,7 @@
         [options setValue:@"delete" forKey:@"_method"];
     }
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/users/%d/friends", self.host, userID];
+    NSString *urlString = [NSString stringWithFormat:@"%@/users/%ld/friends", self.host, (long)userID];
     NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [mutableRequest setHTTPMethod:@"POST"];
     
@@ -1272,7 +1272,7 @@
         category = 0;
     }
 
-    NSString *urlString = [NSString stringWithFormat:@"%@/photos/upload?name=%@&description=%@&category=%d", self.host, [photoName px_urlEncode], [photoDescription px_urlEncode], category];
+    NSString *urlString = [NSString stringWithFormat:@"%@/photos/upload?name=%@&description=%@&category=%ld", self.host, [photoName px_urlEncode], [photoDescription px_urlEncode], (long)category];
 
     NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [mutableRequest setHTTPMethod:@"POST"];

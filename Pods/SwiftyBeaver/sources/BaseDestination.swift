@@ -12,7 +12,7 @@ import Foundation
 // store operating system / platform
 #if os(iOS)
 let OS = "iOS"
-#elseif os(OSX) // elseif os(macOS) // <- available very soon, see https://git.io/vobEG
+#elseif os(OSX)
 let OS = "OSX"
 #elseif os(watchOS)
 let OS = "watchOS"
@@ -20,75 +20,82 @@ let OS = "watchOS"
 let OS = "tvOS"
 #elseif os(Linux)
 let OS = "Linux"
+#elseif os(FreeBSD)
+let OS = "FreeBSD"
+#elseif os(Windows)
+let OS = "Windows"
+#elseif os(Android)
+let OS = "Android"
 #else
 let OS = "Unknown"
 #endif
 
+
 /// destination which all others inherit from. do not directly use
-public class BaseDestination: Hashable, Equatable {
+open class BaseDestination: Hashable, Equatable {
 
     /// output format pattern, see documentation for syntax
-    public var format = "[$Dyyyy-MM-dd HH:mm:ss.SSS$d] $N.$F:$l $C$L$c: $M"
+    open var format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
 
     /// runs in own serial background thread for better performance
-    public var asynchronously = true
+    open var asynchronously = true
 
     /// do not log any message which has a lower level than this one
-    public var minLevel = SwiftyBeaver.Level.Verbose
+    open var minLevel = SwiftyBeaver.Level.verbose
 
     /// set custom log level words for each level
-    public var levelString = LevelString()
+    open var levelString = LevelString()
 
     /// set custom log level colors for each level
-    public var levelColor = LevelColor()
+    open var levelColor = LevelColor()
 
     public struct LevelString {
-        public var Verbose = "VERBOSE"
-        public var Debug = "DEBUG"
-        public var Info = "INFO"
-        public var Warning = "WARNING"
-        public var Error = "ERROR"
+        public var verbose = "VERBOSE"
+        public var debug = "DEBUG"
+        public var info = "INFO"
+        public var warning = "WARNING"
+        public var error = "ERROR"
     }
 
     // For a colored log level word in a logged line
-    // XCode RGB colors
+    // empty on default
     public struct LevelColor {
-        public var Verbose = ""
-        public var Debug = ""
-        public var Info = ""
-        public var Warning = ""
-        public var Error = ""
+        public var verbose = ""     // silver
+        public var debug = ""       // green
+        public var info = ""        // blue
+        public var warning = ""     // yellow
+        public var error = ""       // red
     }
 
     var reset = ""
     var escape = ""
 
     var filters = [FilterType]()
-    let formatter = NSDateFormatter()
+    let formatter = DateFormatter()
 
     // each destination class must have an own hashValue Int
     lazy public var hashValue: Int = self.defaultHashValue
-    public var defaultHashValue: Int {return 0}
+    open var defaultHashValue: Int {return 0}
 
     // each destination instance must have an own serial queue to ensure serial output
     // GCD gives it a prioritization between User Initiated and Utility
-    var queue: dispatch_queue_t?
-
-    var debugPrint = false // set to true to debug the internal logic of the class
+    var queue: DispatchQueue? //dispatch_queue_t?
+    var debugPrint = false // set to true to debug the internal filter logic of the class
 
     public init() {
-        let uuid = NSUUID().UUIDString
+        let uuid = NSUUID().uuidString
         let queueLabel = "swiftybeaver-queue-" + uuid
-        queue = dispatch_queue_create(queueLabel, DISPATCH_QUEUE_SERIAL)
+        queue = DispatchQueue(label: queueLabel, target: queue)
     }
 
     /// send / store the formatted log message to the destination
     /// returns the formatted log message for processing by inheriting method
     /// and for unit tests (nil if error)
-    public func send(level: SwiftyBeaver.Level, msg: String, thread: String,
-        path: String, function: String, line: Int) -> String? {
-        return formatMessage(format, level: level, msg: msg,
-                             thread: thread, file: path, function: function, line: line)
+    open func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
+        file: String, function: String, line: Int) -> String? {
+
+        return formatMessage(format, level: level, msg: msg, thread: thread,
+                             file: file, function: function, line: line)
     }
 
 
@@ -97,17 +104,17 @@ public class BaseDestination: Hashable, Equatable {
     ////////////////////////////////
 
     /// returns the log message based on the format pattern
-    func formatMessage(format: String, level: SwiftyBeaver.Level, msg: String, thread: String,
-        file: String, function: String, line: Int) -> String {
+    func formatMessage(_ format: String, level: SwiftyBeaver.Level, msg: String, thread: String,
+                file: String, function: String, line: Int) -> String {
 
         var text = ""
-        let phrases: [String] = format.componentsSeparatedByString("$")
+        let phrases: [String] = format.components(separatedBy: "$")
 
         for phrase in phrases {
             if !phrase.isEmpty {
                 let firstChar = phrase[phrase.startIndex]
-                let indexAfterFirstChar = phrase.startIndex.advancedBy(1)
-                let remainingPhrase = phrase.substringFromIndex(indexAfterFirstChar)
+                let rangeAfterFirstChar = phrase.index(phrase.startIndex, offsetBy: 1)..<phrase.endIndex
+                let remainingPhrase = phrase[rangeAfterFirstChar]
 
                 switch firstChar {
                 case "L":
@@ -136,6 +143,11 @@ public class BaseDestination: Hashable, Equatable {
                     text += formatDate(remainingPhrase)
                 case "d":
                     text += remainingPhrase
+                case "Z":
+                    // start of datetime format in UTC timezone
+                    text += formatDate(remainingPhrase, timeZone: "UTC")
+                case "z":
+                    text += remainingPhrase
                 case "C":
                     // color code ("" on default)
                     text += escape + colorForLevel(level) + remainingPhrase
@@ -150,56 +162,56 @@ public class BaseDestination: Hashable, Equatable {
     }
 
     /// returns the string of a level
-    func levelWord(level: SwiftyBeaver.Level) -> String {
+    func levelWord(_ level: SwiftyBeaver.Level) -> String {
 
         var str = ""
 
         switch level {
-        case SwiftyBeaver.Level.Debug:
-            str = levelString.Debug
+        case SwiftyBeaver.Level.debug:
+            str = levelString.debug
 
-        case SwiftyBeaver.Level.Info:
-            str = levelString.Info
+        case SwiftyBeaver.Level.info:
+            str = levelString.info
 
-        case SwiftyBeaver.Level.Warning:
-            str = levelString.Warning
+        case SwiftyBeaver.Level.warning:
+            str = levelString.warning
 
-        case SwiftyBeaver.Level.Error:
-            str = levelString.Error
+        case SwiftyBeaver.Level.error:
+            str = levelString.error
 
         default:
             // Verbose is default
-            str = levelString.Verbose
+            str = levelString.verbose
         }
         return str
     }
 
     /// returns color string for level
-    func colorForLevel(level: SwiftyBeaver.Level) -> String {
+    func colorForLevel(_ level: SwiftyBeaver.Level) -> String {
         var color = ""
 
         switch level {
-        case SwiftyBeaver.Level.Debug:
-            color = levelColor.Debug
+        case SwiftyBeaver.Level.debug:
+            color = levelColor.debug
 
-        case SwiftyBeaver.Level.Info:
-            color = levelColor.Info
+        case SwiftyBeaver.Level.info:
+            color = levelColor.info
 
-        case SwiftyBeaver.Level.Warning:
-            color = levelColor.Warning
+        case SwiftyBeaver.Level.warning:
+            color = levelColor.warning
 
-        case SwiftyBeaver.Level.Error:
-            color = levelColor.Error
+        case SwiftyBeaver.Level.error:
+            color = levelColor.error
 
         default:
-            color = levelColor.Verbose
+            color = levelColor.verbose
         }
         return color
     }
 
     /// returns the filename of a path
-    func fileNameOfFile(file: String) -> String {
-        let fileParts = file.componentsSeparatedByString("/")
+    func fileNameOfFile(_ file: String) -> String {
+        let fileParts = file.components(separatedBy: "/")
         if let lastPart = fileParts.last {
             return lastPart
         }
@@ -207,11 +219,11 @@ public class BaseDestination: Hashable, Equatable {
     }
 
     /// returns the filename without suffix (= file ending) of a path
-    func fileNameWithoutSuffix(file: String) -> String {
+    func fileNameWithoutSuffix(_ file: String) -> String {
         let fileName = fileNameOfFile(file)
 
         if !fileName.isEmpty {
-            let fileNameParts = fileName.componentsSeparatedByString(".")
+            let fileNameParts = fileName.components(separatedBy: ".")
             if let firstPart = fileNameParts.first {
                 return firstPart
             }
@@ -220,33 +232,40 @@ public class BaseDestination: Hashable, Equatable {
     }
 
     /// returns a formatted date string
-    func formatDate(dateFormat: String) -> String {
-        //formatter.timeZone = NSTimeZone(abbreviation: "UTC")
+    /// optionally in a given abbreviated timezone like "UTC"
+    func formatDate(_ dateFormat: String, timeZone: String = "") -> String {
+        if !timeZone.isEmpty {
+            formatter.timeZone = TimeZone(abbreviation: timeZone)
+        }
         formatter.dateFormat = dateFormat
-        let dateStr = formatter.stringFromDate(NSDate())
+        let dateStr = formatter.string(from: NSDate() as Date)
         return dateStr
     }
 
     /// returns the json-encoded string value
     /// after it was encoded by jsonStringFromDict
-    func jsonStringValue(jsonString: String?, key: String) -> String {
+    func jsonStringValue(_ jsonString: String?, key: String) -> String {
         guard let str = jsonString else {
             return ""
         }
 
-        let startIndex = str.startIndex.advancedBy(key.characters.count + 5)
-        let endIndex = str.endIndex.advancedBy(-2)
-        let range = Range(startIndex..<endIndex)
-        return str.substringWithRange(range)
+        // remove the leading {"key":" from the json string and the final }
+        let offset = key.characters.count + 5
+        let endIndex = str.index(str.startIndex,
+                                 offsetBy: str.characters.count - 2)
+        let range = str.index(str.startIndex, offsetBy: offset)..<endIndex
+        return str[range]
     }
 
-    // turns dict into JSON-encoded string
-    func jsonStringFromDict(dict: [String: AnyObject]) -> String? {
+    /// turns dict into JSON-encoded string
+    func jsonStringFromDict(_ dict: [String: Any]) -> String? {
         var jsonString: String?
+
         // try to create JSON string
         do {
-            let jsonData = try NSJSONSerialization.dataWithJSONObject(dict, options: [])
-            if let str = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as? String {
+            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [])
+            if let str = NSString(data: jsonData,
+                                  encoding: String.Encoding.utf8.rawValue) as? String {
                 jsonString = str
             }
         } catch let error as NSError {
@@ -260,13 +279,13 @@ public class BaseDestination: Hashable, Equatable {
     ////////////////////////////////
 
     /// Add a filter that determines whether or not a particular message will be logged to this destination
-    public func addFilter(filter: FilterType) {
+    public func addFilter(_ filter: FilterType) {
         filters.append(filter)
     }
 
     /// Remove a filter from the list of filters
-    public func removeFilter(filter: FilterType) {
-        let index = filters.indexOf {
+    public func removeFilter(_ filter: FilterType) {
+        let index = filters.index {
             return ObjectIdentifier($0) == ObjectIdentifier(filter)
         }
 
@@ -274,35 +293,37 @@ public class BaseDestination: Hashable, Equatable {
             return
         }
 
-        filters.removeAtIndex(filterIndex)
+        filters.remove(at: filterIndex)
     }
 
     /// Answer whether the destination has any message filters
     /// returns boolean and is used to decide whether to resolve the message before invoking shouldLevelBeLogged
     func hasMessageFilters() -> Bool {
-        return !getFiltersTargeting(Filter.TargetType.Message(.Equals([], true)), fromFilters: self.filters).isEmpty
+        return !getFiltersTargeting(Filter.TargetType.Message(.Equals([], true)),
+                                    fromFilters: self.filters).isEmpty
     }
 
     /// checks if level is at least minLevel or if a minLevel filter for that path does exist
     /// returns boolean and can be used to decide if a message should be logged or not
-    func shouldLevelBeLogged(level: SwiftyBeaver.Level, path: String, function: String, message: String? = nil) -> Bool {
+    func shouldLevelBeLogged(_ level: SwiftyBeaver.Level, path: String,
+                             function: String, message: String? = nil) -> Bool {
 
         if filters.isEmpty {
             if level.rawValue >= minLevel.rawValue {
                 if debugPrint {
-                 print("filters is empty and level >= minLevel")
+                    print("filters is empty and level >= minLevel")
                 }
                 return true
             } else {
                 if debugPrint {
-                  print("filters is empty and level < minLevel")
+                    print("filters is empty and level < minLevel")
                 }
                 return false
             }
         }
 
         let (matchedExclude, allExclude) = passedExcludedFilters(level, path: path,
-                                                                function: function, message: message)
+                                                                 function: function, message: message)
         if allExclude > 0 && matchedExclude != allExclude {
             if debugPrint {
                 print("filters is not empty and message was excluded")
@@ -339,7 +360,7 @@ public class BaseDestination: Hashable, Equatable {
         return false
     }
 
-    func getFiltersTargeting(target: Filter.TargetType, fromFilters: [FilterType]) -> [FilterType] {
+    func getFiltersTargeting(_ target: Filter.TargetType, fromFilters: [FilterType]) -> [FilterType] {
         return fromFilters.filter {
             filter in
             return filter.getTarget() == target
@@ -347,7 +368,7 @@ public class BaseDestination: Hashable, Equatable {
     }
 
     /// returns a tuple of matched and all filters
-    func passedRequiredFilters(level: SwiftyBeaver.Level, path: String,
+    func passedRequiredFilters(_ level: SwiftyBeaver.Level, path: String,
                                function: String, message: String?) -> (Int, Int) {
         let requiredFilters = self.filters.filter {
             filter in
@@ -355,7 +376,7 @@ public class BaseDestination: Hashable, Equatable {
         }
 
         let matchingFilters = applyFilters(requiredFilters, level: level, path: path,
-                            function: function, message: message)
+                                           function: function, message: message)
         if debugPrint {
             print("matched \(matchingFilters) of \(requiredFilters.count) required filters")
         }
@@ -364,8 +385,8 @@ public class BaseDestination: Hashable, Equatable {
     }
 
     /// returns a tuple of matched and all filters
-    func passedNonRequiredFilters(level: SwiftyBeaver.Level,
-                                           path: String, function: String, message: String?) -> (Int, Int) {
+    func passedNonRequiredFilters(_ level: SwiftyBeaver.Level,
+                                  path: String, function: String, message: String?) -> (Int, Int) {
         let nonRequiredFilters = self.filters.filter {
             filter in
             return !filter.isRequired() && !filter.isExcluded()
@@ -380,8 +401,8 @@ public class BaseDestination: Hashable, Equatable {
     }
 
     /// returns a tuple of matched and all exclude filters
-    func passedExcludedFilters(level: SwiftyBeaver.Level,
-                              path: String, function: String, message: String?) -> (Int, Int) {
+    func passedExcludedFilters(_ level: SwiftyBeaver.Level,
+                               path: String, function: String, message: String?) -> (Int, Int) {
         let excludeFilters = self.filters.filter {
             filter in
             return filter.isExcluded()
@@ -395,7 +416,7 @@ public class BaseDestination: Hashable, Equatable {
         return (matchingFilters, excludeFilters.count)
     }
 
-    func applyFilters(targetFilters: [FilterType], level: SwiftyBeaver.Level,
+    func applyFilters(_ targetFilters: [FilterType], level: SwiftyBeaver.Level,
                       path: String, function: String, message: String?) -> Int {
         return targetFilters.filter {
             filter in
@@ -422,7 +443,7 @@ public class BaseDestination: Hashable, Equatable {
             }
 
             return passes
-        }.count
+            }.count
     }
 
   /**
