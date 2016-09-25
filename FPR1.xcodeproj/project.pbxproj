@@ -11,6 +11,8 @@
 		3CD61040B551614334517628 /* Pods_FPR1UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9940C04588A315F8E54720D5 /* Pods_FPR1UITests.framework */; };
 		7D8E2B0D58B8E6BABC4395AE /* Pods_FPR1Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E05DF809BB48BAE9950AF4 /* Pods_FPR1Tests.framework */; };
 		9007EB6D1D740E090046403A /* FRPCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9007EB6C1D740E090046403A /* FRPCell.swift */; };
+		903A793B1D9663FE00E41745 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903A793A1D9663FE00E41745 /* RegisterView.swift */; };
+		904951AE1D9677A20014F5E7 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904951AD1D9677A20014F5E7 /* LogInViewModel.swift */; };
 		90591B0F1D756D6B004B8C08 /* FRPPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90591B0E1D756D6B004B8C08 /* FRPPhotoViewController.swift */; };
 		906541BE1D714F8000C6497A /* FRPGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906541B91D714F8000C6497A /* FRPGalleryViewController.swift */; };
 		906541BF1D714F8000C6497A /* FRPGalleryFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906541BA1D714F8000C6497A /* FRPGalleryFlowLayout.swift */; };
@@ -32,6 +34,8 @@
 		909773491D714A39007C85B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 909773471D714A39007C85B1 /* LaunchScreen.storyboard */; };
 		909773541D714A39007C85B1 /* FPR1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909773531D714A39007C85B1 /* FPR1Tests.swift */; };
 		9097735F1D714A3A007C85B1 /* FPR1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097735E1D714A3A007C85B1 /* FPR1UITests.swift */; };
+		909E93951D9637AE001799E5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E93931D9637AE001799E5 /* SignInViewController.swift */; };
+		909E93961D9637AE001799E5 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 909E93941D9637AE001799E5 /* SignInViewController.xib */; };
 		90AB78441D7D670A0096B193 /* FRPGalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AB78431D7D670A0096B193 /* FRPGalleryViewModel.swift */; };
 		90AB78461D7D69410096B193 /* FRPFullSizePhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AB78451D7D69410096B193 /* FRPFullSizePhotoViewModel.swift */; };
 		90AB78481D7DD1D70096B193 /* FRPPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AB78471D7DD1D70096B193 /* FRPPhotoViewModel.swift */; };
@@ -69,6 +73,8 @@
 		9038BBA31D7737200072A423 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/SDWebImage/SDWebImage.framework"; sourceTree = "<group>"; };
 		9038BBA41D7737200072A423 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/SVProgressHUD/SVProgressHUD.framework"; sourceTree = "<group>"; };
 		9038BBA51D7737200072A423 /* YYModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YYModel.framework; path = "../../../Library/Developer/Xcode/DerivedData/FPR1-anjnodvayvzbanarvlhjhmgbnvfx/Build/Products/Debug-iphonesimulator/YYModel/YYModel.framework"; sourceTree = "<group>"; };
+		903A793A1D9663FE00E41745 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		904951AD1D9677A20014F5E7 /* LogInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
 		90591B0E1D756D6B004B8C08 /* FRPPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPPhotoViewController.swift; sourceTree = "<group>"; };
 		906541B81D714F8000C6497A /* FPR1-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FPR1-Bridging-Header.h"; sourceTree = "<group>"; };
 		906541B91D714F8000C6497A /* FRPGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPGalleryViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +112,8 @@
 		9097735A1D714A3A007C85B1 /* FPR1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FPR1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9097735E1D714A3A007C85B1 /* FPR1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPR1UITests.swift; sourceTree = "<group>"; };
 		909773601D714A3A007C85B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		909E93931D9637AE001799E5 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		909E93941D9637AE001799E5 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		90AB78431D7D670A0096B193 /* FRPGalleryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPGalleryViewModel.swift; sourceTree = "<group>"; };
 		90AB78451D7D69410096B193 /* FRPFullSizePhotoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPFullSizePhotoViewModel.swift; sourceTree = "<group>"; };
 		90AB78471D7DD1D70096B193 /* FRPPhotoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRPPhotoViewModel.swift; sourceTree = "<group>"; };
@@ -185,6 +193,8 @@
 			children = (
 				906541B91D714F8000C6497A /* FRPGalleryViewController.swift */,
 				90AB78431D7D670A0096B193 /* FRPGalleryViewModel.swift */,
+				906541BA1D714F8000C6497A /* FRPGalleryFlowLayout.swift */,
+				9007EB6C1D740E090046403A /* FRPCell.swift */,
 			);
 			name = Galler;
 			sourceTree = "<group>";
@@ -243,12 +253,11 @@
 			children = (
 				9093C59B1D752B1600A07B72 /* New Group */,
 				906541C21D7151C500C6497A /* 500px-iOS-api */,
+				909E93921D96334F001799E5 /* Log in */,
 				9093C59A1D752AF900A07B72 /* Galler */,
 				9093C59D1D752B5300A07B72 /* FRPFullSizePhoto */,
 				9093C59C1D752B1900A07B72 /* model */,
 				906541BB1D714F8000C6497A /* FRPPhotoImporter.swift */,
-				906541BA1D714F8000C6497A /* FRPGalleryFlowLayout.swift */,
-				9007EB6C1D740E090046403A /* FRPCell.swift */,
 				9097733E1D714A39007C85B1 /* AppDelegate.swift */,
 				909773401D714A39007C85B1 /* ViewController.swift */,
 				906541B81D714F8000C6497A /* FPR1-Bridging-Header.h */,
@@ -276,6 +285,17 @@
 				909773601D714A3A007C85B1 /* Info.plist */,
 			);
 			path = FPR1UITests;
+			sourceTree = "<group>";
+		};
+		909E93921D96334F001799E5 /* Log in */ = {
+			isa = PBXGroup;
+			children = (
+				909E93931D9637AE001799E5 /* SignInViewController.swift */,
+				909E93941D9637AE001799E5 /* SignInViewController.xib */,
+				903A793A1D9663FE00E41745 /* RegisterView.swift */,
+				904951AD1D9677A20014F5E7 /* LogInViewModel.swift */,
+			);
+			name = "Log in";
 			sourceTree = "<group>";
 		};
 		92D80CEA6FDD2C9453823D19 /* Frameworks */ = {
@@ -426,6 +446,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				909E93961D9637AE001799E5 /* SignInViewController.xib in Resources */,
 				909773491D714A39007C85B1 /* LaunchScreen.storyboard in Resources */,
 				909773461D714A39007C85B1 /* Assets.xcassets in Resources */,
 				906541D61D7151C500C6497A /* LICENSE in Resources */,
@@ -594,12 +615,14 @@
 			files = (
 				906541DC1D7151C500C6497A /* PXRequest+Creation.m in Sources */,
 				906541DA1D7151C500C6497A /* PXAPIHelper+Auth.m in Sources */,
+				904951AE1D9677A20014F5E7 /* LogInViewModel.swift in Sources */,
 				90AB78461D7D69410096B193 /* FRPFullSizePhotoViewModel.swift in Sources */,
 				90AB78441D7D670A0096B193 /* FRPGalleryViewModel.swift in Sources */,
 				90591B0F1D756D6B004B8C08 /* FRPPhotoViewController.swift in Sources */,
 				909773411D714A39007C85B1 /* ViewController.swift in Sources */,
 				906541C11D714F8000C6497A /* FRPPhotoModel.m in Sources */,
 				906541BE1D714F8000C6497A /* FRPGalleryViewController.swift in Sources */,
+				909E93951D9637AE001799E5 /* SignInViewController.swift in Sources */,
 				906541DB1D7151C500C6497A /* PXAPIHelper.m in Sources */,
 				906541D71D7151C500C6497A /* NSData+Base64.m in Sources */,
 				90AB78481D7DD1D70096B193 /* FRPPhotoViewModel.swift in Sources */,
@@ -607,6 +630,7 @@
 				906541DD1D7151C500C6497A /* PXRequest.m in Sources */,
 				9093C59F1D752B7000A07B72 /* FRPFullSizePhotoViewController.swift in Sources */,
 				9007EB6D1D740E090046403A /* FRPCell.swift in Sources */,
+				903A793B1D9663FE00E41745 /* RegisterView.swift in Sources */,
 				9097733F1D714A39007C85B1 /* AppDelegate.swift in Sources */,
 				906541D91D7151C500C6497A /* OAuthCore.m in Sources */,
 				906541BF1D714F8000C6497A /* FRPGalleryFlowLayout.swift in Sources */,

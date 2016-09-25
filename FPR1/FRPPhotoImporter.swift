@@ -11,15 +11,16 @@ import RxCocoa
 
 class FRPPhotoImporter: NSObject {
  typealias DictType = Dictionary<String, AnyObject>
-    
+    /** 获取 popular 类别中所有图片的model **/
     fileprivate static func popualUrlRequest () -> URLRequest {
         return PXRequest.apiHelper().urlRequest(for: PXAPIHelperPhotoFeature.popular, resultsPerPage: 100, page: 0, photoSizes: PXPhotoModelSize.thumbnail, sortOrder: PXAPIHelperSortOrder.rating, except: PXPhotoModelCategory.PXPhotoModelCategoryNude)
     }
-    
+    /** 获取一张图片的详细 model **/
     fileprivate static func detailPhotoURLRequest(_ model: FRPPhotoModel) -> URLRequest {
         return PXRequest.apiHelper().urlRequest(forPhotoID: model.identifier!.intValue, photoSizes: PXPhotoModelSize.large , commentsPage: -1)
     }
     
+    /** 下载大尺寸图片 **/
     static func fetchDetailPhoto(_ model: FRPPhotoModel) -> Observable<(Data, HTTPURLResponse)> {
         let request = FRPPhotoImporter.detailPhotoURLRequest(model)
        
@@ -35,7 +36,9 @@ class FRPPhotoImporter: NSObject {
         return connection
     }
     
+    /** 获取 分类 中所有图片的model **/
     static func importPhotos() -> Observable<[FRPPhotoModel]> {
+        //获取 popular 分类
         let request = self.popualUrlRequest()
         let connection = URLSession.shared.rx.response(request)
             .shareReplay(1)
@@ -100,9 +103,11 @@ class FRPPhotoImporter: NSObject {
         guard let url = str else {return Observable.empty()}
         let request = URLRequest(url: URL.init(string: url)!)
         let connect = URLSession.shared.rx.response(request).shareReplay(1)
-        _ = connect.subscribe(onError: { (error) in
-                //下载数据错误返回空的Singal
-                log.warning(error)
+        _ = connect
+            .subscribe(onError: { (error) in
+                
+                let print = error as NSError
+                log.warning(print.code)
             })
         return connect
     }

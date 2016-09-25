@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Action.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-FPR1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -44,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyBeaver.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,22 +77,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2D1106B073BF9313B3B383B629B3A2BE</key>
+		<key>1D8A83C1387CD41FA67E8AFA773C0E20</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5C6DC9D223E27E497366A8FCB3949CBA</key>
+		<key>28AAC2665DB501D22F70806F7A8F6657</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>66D98FB7B6C7F28469774FE4C18011DD</key>
+		<key>2F8EF22FB3479863A8D6B15F688E46BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6A01F731597C9F7E947513F07637DD2B</key>
+		<key>4E14C5B03598CF2803866CC6BE8CF058</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7BADF4FD66AD847EE4FFE5921E6B8BD2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,17 +117,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CD61587744673EE332EBB50870A5CCE6</key>
+		<key>BDADDAEA0B8A499B8D2481B6D47F534D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D1D1ABEDA76307F0D2C3D77352663CCC</key>
+		<key>D04A5C7F2DC44440D33E0A512D8E00E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ED619721FD86338C88AF45053631BC36</key>
+		<key>DD95C7FD76BE73BCA2758A504D071913</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E304F5A94B113684CA65B665BC8D4878</key>
 		<dict>
 			<key>primary</key>
 			<true/>

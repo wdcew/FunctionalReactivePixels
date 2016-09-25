@@ -6,6 +6,7 @@ target 'FPR1' do
   use_frameworks!
 
   # Pods for FPR1
+  pod 'Action', '~> 2.0.0-beta.1'
   pod 'RxCocoa', '~> 3.0.0-beta.1'
   pod 'RxSwift', '~> 3.0.0-beta.1'
   pod 'SwiftyBeaver'
@@ -14,6 +15,7 @@ target 'FPR1' do
   pod 'libextobjc'
   pod 'SDWebImage', '~> 3.8.1'
   pod 'YYModel'
+  pod 'SnapKit', '~> 3.0'
 
   target 'FPR1Tests' do
     inherit! :search_paths

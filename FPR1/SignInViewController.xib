@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignInViewController" customModule="FPR1" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="ClP-xA-ose"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="loginView" customModule="FPR1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_register_background" translatesAutoresizingMaskIntoConstraints="NO" id="wm5-w4-Fe6">
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
+                </imageView>
+                <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxl-yI-Bfd">
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Nxl-yI-Bfd" secondAttribute="height" multiplier="133:20" id="QlL-qY-5GR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="登陆" backgroundImage="login_register_button"/>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_rgister_textfield_bg" translatesAutoresizingMaskIntoConstraints="NO" id="4SV-Qr-0M2">
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="92" id="YnW-g9-xxS"/>
+                        <constraint firstAttribute="width" constant="266" id="gVU-pm-Vjp"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Xv-2A-Ikc">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="16" id="1gf-dn-vKE"/>
+                        <constraint firstAttribute="height" constant="16" id="fEV-Tw-pwb"/>
+                    </constraints>
+                    <state key="normal" image="login_close_icon"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgs-SZ-RPv">
+                    <frame key="frameInset" minX="55" minY="304" width="258" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="4SV-Qr-0M2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="204" id="5UP-tx-Yme"/>
+                <constraint firstItem="4SV-Qr-0M2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="95L-Rk-BQT"/>
+                <constraint firstAttribute="bottom" secondItem="wm5-w4-Fe6" secondAttribute="bottom" id="FCY-Vk-z2o"/>
+                <constraint firstItem="Nxl-yI-Bfd" firstAttribute="top" secondItem="4SV-Qr-0M2" secondAttribute="bottom" constant="40" id="N4y-P3-tby"/>
+                <constraint firstItem="Nxl-yI-Bfd" firstAttribute="trailing" secondItem="4SV-Qr-0M2" secondAttribute="trailing" id="SBj-RT-ZFr"/>
+                <constraint firstItem="Nxl-yI-Bfd" firstAttribute="leading" secondItem="4SV-Qr-0M2" secondAttribute="leading" id="WwA-8G-6N7"/>
+                <constraint firstItem="wm5-w4-Fe6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jeY-25-3Z7"/>
+                <constraint firstItem="wm5-w4-Fe6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="p2m-wH-jNR"/>
+                <constraint firstItem="0Xv-2A-Ikc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="sPN-7c-b1d"/>
+                <constraint firstAttribute="trailing" secondItem="wm5-w4-Fe6" secondAttribute="trailing" id="xJ3-SZ-wk7"/>
+                <constraint firstItem="0Xv-2A-Ikc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="63" id="yXL-Nt-k1J"/>
+            </constraints>
+            <connections>
+                <outlet property="PromptLabel" destination="Dgs-SZ-RPv" id="GB8-dX-R6w"/>
+                <outlet property="confirmBt" destination="Nxl-yI-Bfd" id="Glm-Sa-Trd"/>
+                <outlet property="dismissBt" destination="wm5-w4-Fe6" id="mMQ-jS-EmZ"/>
+                <outlet property="registerView" destination="4SV-Qr-0M2" id="sXe-jX-1sz"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="login_close_icon" width="16" height="16"/>
+        <image name="login_register_background" width="320" height="568"/>
+        <image name="login_register_button" width="87" height="40"/>
+        <image name="login_rgister_textfield_bg" width="266" height="92"/>
+    </resources>
+</document>

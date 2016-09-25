@@ -25,20 +25,36 @@ class FRPGallerCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Popular on 500px";
-        self.collectionView!.register(FRPCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
+        //配置VIew
+        configView()
         /** Bind Property **/
         bindToProperty()
     }
     
+    func configView() {
+        self.title = "Popular on 500px";
+        self.collectionView!.register(FRPCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        //navItem添加Butoon
+        let btItem = UIBarButtonItem()
+        btItem.title = "注册"
+        btItem.target = self
+        btItem.action = #selector(self.presentSignInVC)
+        self.navigationItem.rightBarButtonItem = btItem
+    }
+    
     //MARK: RAC configurable method
-    func bindToProperty () {
+    func bindToProperty() {
         
         _ = viewModel.photoArray.asDriver()
             .drive (onNext: {[weak self] _ in
                 self?.collectionView?.reloadData()
                 })
+    }
+    
+//     MARK: - Action Function
+    func presentSignInVC() {
+        self.present(SignInViewController(), animated: true)
     }
     
 }

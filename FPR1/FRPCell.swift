@@ -28,13 +28,10 @@ class FRPCell: UICollectionViewCell {
                 if let data = data {
                     return UIImage.init(data: data )
                 }
-                
                 return nil
             })
-            .subscribe (onNext: {[weak self] (image) in
-                self!.imagView?.image = image
-            })
-        
+            .observeOn(MainScheduler.instance)
+            .bindTo(imagView!.rx.image)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
