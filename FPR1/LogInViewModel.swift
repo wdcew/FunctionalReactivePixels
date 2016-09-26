@@ -28,12 +28,13 @@ class LogInViewModel: NSObject {
         .bindTo(password)
         
         //配置Button使能
-        buttonEnable = Observable.combineLatest(account.asObservable(), password.asObservable(), resultSelector: { (account, password) -> Bool in
-            guard account.contains("@") else {return false}
-            guard !password.isEmpty else {return false}
-            
-            return true
-        })
+        buttonEnable = Observable
+            .combineLatest(account.asObservable(), password.asObservable(), resultSelector: { (account, password) -> Bool in
+                guard account.contains("@") else {return false}
+                guard !password.isEmpty else {return false}
+                
+                return true
+            })
         
         //配置 action
         configAction()
@@ -44,8 +45,10 @@ class LogInViewModel: NSObject {
     //MARK: - Config Function
     func configAction() {
         loginAction = CocoaAction.init(workFactory: { (_) -> Observable<Void> in
+            
             return Observable.create({ (observer) -> Disposable in
-                    observer.onNext(())
+                observer.onNext(())
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                     observer.onCompleted()
                     debugPrint("下载完成")
